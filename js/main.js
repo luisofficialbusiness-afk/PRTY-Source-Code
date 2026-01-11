@@ -1,4 +1,4 @@
-* ====== SIDEBAR TOGGLE ====== */
+/* ====== SIDEBAR TOGGLE ====== */
 function toggleSidebar(){
   const sb = document.getElementById("sidebar");
   if(sb.style.left === "-250px"){
@@ -19,8 +19,11 @@ function updateClock(){
 setInterval(updateClock,1000);
 updateClock();
 
-/* ====== FIXED GAME LAUNCHER ====== */
+/* ====== FIXED GAME LAUNCHER ★ ====== */
 function launchGame(url){
-  // Opens the game in a new tab (works locally and on Vercel)
-  window.open(url, "_blank");
+  const win = window.open(url, "_blank"); // open in new tab
+  if(!win){
+    // fallback if popup blocked
+    window.location.href = url;
+  }
 }
