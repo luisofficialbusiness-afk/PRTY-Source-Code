@@ -1,3 +1,4 @@
+/* ====== SIDEBAR TOGGLE ====== */
 function toggleSidebar(){
   const sb = document.getElementById("sidebar");
   if(sb.style.left === "-250px"){
@@ -7,6 +8,7 @@ function toggleSidebar(){
   }
 }
 
+/* ====== LIVE CLOCK & DATE ====== */
 function updateClock(){
   const now = new Date();
   if(document.getElementById("time")){
@@ -17,9 +19,12 @@ function updateClock(){
 setInterval(updateClock,1000);
 updateClock();
 
-/* 🚀 GAME LAUNCHER */
+/* ====== GAME LAUNCHER ====== */
 function launchGame(url){
+  // Open a new blank window
   const win = window.open("about:blank");
+
+  // Inject iframe with your game
   win.document.write(`
     <html>
     <head>
