@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(120deg,#ff00cc,#3333ff);
+  color: white;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: hotpink;
+}
+
+.discord-btn {
+  position: absolute;
+  bottom: 20px;
+  background: #5865F2;
+  text-align: center;
+}
+
+.toggle {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  background: hotpink;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 20px;
+}
+
+.main {
+  margin-left: 270px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 80px;
+  text-align: center;
+}
+
+.clock-box {
+  text-align: center;
+  font-size: 30px;
+  background: linear-gradient(45deg,#ff00cc,#00ffff);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.page-title {
+  font-size: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
