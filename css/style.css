@@ -80,6 +80,11 @@ body {
   text-align: center;
   backdrop-filter: blur(10px);
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .card img {
