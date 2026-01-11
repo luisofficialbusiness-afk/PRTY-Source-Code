@@ -19,19 +19,62 @@
 
 <div class="main">
 <h1 class="page-title">🎮 Games</h1>
-<div class="grid" id="gameGrid"></div>
+
+<div class="grid">
+
+<div class="card" onclick="launchGame('game1.html')">
+  <img src="images/game1.png">
+  <div class="game-title">Game 1</div>
+</div>
+
+<div class="card" onclick="launchGame('game2.html')">
+  <img src="images/game2.png">
+  <div class="game-title">Game 2</div>
+</div>
+
+<div class="card" onclick="launchGame('game3.html')">
+  <img src="images/game3.png">
+  <div class="game-title">Game 3</div>
+</div>
+
+<div class="card" onclick="launchGame('game4.html')">
+  <img src="images/game4.png">
+  <div class="game-title">Game 4</div>
+</div>
+
+<div class="card" onclick="launchGame('game5.html')">
+  <img src="images/game5.png">
+  <div class="game-title">Game 5</div>
+</div>
+
+<div class="card" onclick="launchGame('game6.html')">
+  <img src="images/game6.png">
+  <div class="game-title">Game 6</div>
+</div>
+
+<div class="card" onclick="launchGame('game7.html')">
+  <img src="images/game7.png">
+  <div class="game-title">Game 7</div>
+</div>
+
+<div class="card" onclick="launchGame('game8.html')">
+  <img src="images/game8.png">
+  <div class="game-title">Game 8</div>
+</div>
+
+<div class="card" onclick="launchGame('game9.html')">
+  <img src="images/game9.png">
+  <div class="game-title">Game 9</div>
+</div>
+
+<div class="card" onclick="launchGame('game10.html')">
+  <img src="images/game10.png">
+  <div class="game-title">Game 10</div>
+</div>
+
+</div>
 </div>
 
 <script src="js/main.js"></script>
-<script>
-for(let i=1;i<=20;i++){
-  const div = document.createElement("div");
-  div.className = "card";
-  div.innerHTML = `Game ${i}<br><small>game${i}.html</small>`;
-  div.onclick = () => launchGame(`game${i}.html`);
-  document.getElementById("gameGrid").appendChild(div);
-}
-</script>
-
 </body>
 </html>
