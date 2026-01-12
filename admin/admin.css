@@ -1,0 +1,39 @@
+/* General Reset */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif;}
+body {background:#0f0f17; color:#fff;}
+
+/* Login Page */
+.login-container{display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh;}
+.login-container h1{margin-bottom:20px; color:#ff4fff; text-shadow:0 0 10px #ff4fff;}
+.login-container input{padding:10px; margin:10px 0; border:none; border-radius:10px; width:250px; background:#1a1a2e; color:#fff;}
+.login-container button{padding:10px 20px; background:#ff4fff; border:none; border-radius:10px; cursor:pointer; color:#000; font-weight:bold; margin-top:10px;}
+.login-container button:hover{background:#ff88ff;}
+.error{color:#ff3333; margin-top:5px;}
+
+/* Dashboard */
+.dashboard-header{display:flex; justify-content:space-between; align-items:center; padding:20px;}
+.dashboard-header h1{color:#ff4fff; text-shadow:0 0 10px #ff4fff;}
+.dashboard-header p{font-size:16px; margin-top:5px; background: linear-gradient(90deg, #ff4fff, #33ffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:bold;}
+.top-buttons button{margin-left:10px; background:#ff4fff; color:#000; border:none; padding:10px 15px; border-radius:10px; cursor:pointer; font-weight:bold;}
+.top-buttons button:hover{background:#ff88ff;}
+
+/* Ticket Grid */
+.ticket-grid, .pending-deletions{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; padding:20px;}
+.ticket-card{background:#1a1a2e; border-radius:15px; padding:15px; box-shadow:0 0 15px #ff4fff50;}
+.ticket-card h3{margin-bottom:10px; color:#ff4fff;}
+.ticket-card p{font-size:14px; margin-bottom:10px;}
+.ticket-card .status{font-weight:bold;}
+.ticket-card button{margin-right:5px; padding:5px 10px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;}
+.ticket-card button.done{background:#33ff33;}
+.ticket-card button.escalate{background:#ff3333;}
+.ticket-card button.delete{background:#ffaa00;}
+
+/* Popup */
+.popup{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center;}
+.popup-content{background:#1a1a2e; padding:20px; border-radius:15px; width:400px;}
+.popup-content h2{color:#ff4fff; text-align:center; margin-bottom:15px;}
+.popup-content input, .popup-content select, .popup-content textarea{width:100%; padding:8px; margin:5px 0 10px 0; border-radius:10px; border:none; background:#0f0f17; color:#fff;}
+.popup-content button{padding:8px 15px; margin-top:5px; cursor:pointer; border-radius:10px; font-weight:bold;}
+#closePopup{background:#ff3333; color:#fff;}
+#ticketForm button[type="submit"]{background:#33ff33; color:#000;}
+#closeCatastrophic{background:#ff4fff; color:#000; width:100%;}
