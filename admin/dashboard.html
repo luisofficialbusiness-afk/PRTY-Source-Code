@@ -1,55 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+<title>PRTY Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="topbar">
-  <h2 id="welcome">Welcome</h2>
+  <h2 id="welcome"></h2>
   <div>
-    <span id="taskCounter">0 tasks</span>
-    <button onclick="openAddTicket()">➕ Add Ticket</button>
-    <button id="catModeBtn" onclick="toggleCatastrophicMode()">💥 Catastrophic Mode</button>
+    <span id="taskCounter"></span>
+    <button onclick="openAdd()">➕ Add</button>
+    <button id="catBtn" onclick="toggleCat()">💥 Catastrophic</button>
     <button onclick="logout()">Logout</button>
   </div>
 </div>
 
-<div class="dashboard">
-  <div id="ticketsGrid" class="tickets-grid"></div>
-</div>
+<div id="tickets" class="ticket-grid"></div>
 
-<!-- Add Ticket Popup -->
-<div id="addTicketPopup" class="popup">
+<div id="addPopup" class="popup">
   <h3>Add Ticket</h3>
-  <select id="ticketType">
+  <select id="type">
     <option>Bug</option>
     <option>Suggestion</option>
   </select>
-  <select id="ticketSeverity">
+  <select id="sev">
     <option>Low</option>
     <option>Medium</option>
     <option>High</option>
     <option>Critical</option>
   </select>
-  <input id="ticketTitle" placeholder="Title">
-  <textarea id="ticketDesc" placeholder="Description"></textarea>
-  <button onclick="submitTicket()">Submit</button>
-  <button onclick="closeAddTicket()">Cancel</button>
+  <input id="title" placeholder="Title">
+  <textarea id="desc" placeholder="Description"></textarea>
+  <button onclick="addTicket()">Submit</button>
+  <button onclick="closeAdd()">Cancel</button>
 </div>
 
-<!-- Catastrophic Mode Overlay -->
 <div id="catOverlay" class="cat-overlay">
-  <h2>💥 Catastrophic Mode</h2>
-  <p id="catStats"></p>
-  <button onclick="toggleCatastrophicMode()">Close</button>
+  <h1>💥 CATASTROPHIC MODE</h1>
+  <p id="stats"></p>
+  <button onclick="toggleCat()">Close</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
 <script src="auth.js"></script>
-<script>
-  loadDashboard();
-</script>
+<script>loadDashboard()</script>
 </body>
 </html>
