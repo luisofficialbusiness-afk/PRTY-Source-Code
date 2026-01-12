@@ -1,6 +1,6 @@
 // Users setup
 const USERS = [
-  { username: "rveprty.", passwordHash: "REPLACE_THIS_HASH", role: "owner" }
+  { username: "rveprty.", passwordHash: "2211d99db6703a40d18a8356684797b0da4692e6c76152669453a9c4ac797798", role: "owner" }
 ];
 
 // ----------------- LOGIN -----------------
