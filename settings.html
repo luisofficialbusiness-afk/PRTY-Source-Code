@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRTY — Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body {
+  margin: 0;
+  background: #0b0b0f;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+header {
+  padding: 15px 25px;
+  font-size: 22px;
+  font-weight: bold;
+  background: #111;
+  border-bottom: 2px solid #222;
+}
+
+.container {
+  padding: 20px;
+}
+
+.setting-group {
+  margin-bottom: 30px;
+}
+
+.setting-group h2 {
+  margin-bottom: 10px;
+  color: #7a4cff;
+}
+
+.setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.setting label {
+  font-size: 14px;
+}
+
+.setting select, .setting input[type="checkbox"], .setting button {
+  cursor: pointer;
+}
+
+button {
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #7a4cff;
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #9a6fff;
+}
+</style>
+</head>
+<body>
+
+<header>⚙️ PRTY Settings</header>
+
+<div class="container">
+
+  <!-- Appearance -->
+  <div class="setting-group">
+    <h2>🎨 Appearance</h2>
+    <div class="setting">
+      <label for="theme">Color Theme:</label>
+      <select id="theme">
+        <option value="default">Default</option>
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="neon">Neon</option>
+        <option value="party">Party</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Launch -->
+  <div class="setting-group">
+    <h2>🚀 Default Launch</h2>
+    <div class="setting">
+      <label for="launchMode">Games / Movies open in:</label>
+      <select id="launchMode">
+        <option value="about:blank">About:blank</option>
+        <option value="_self">Same Tab</option>
+        <option value="_blank">New Tab</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Performance -->
+  <div class="setting-group">
+    <h2>⚡ Performance</h2>
+    <div class="setting">
+      <label for="lowPower">Low Power Mode:</label>
+      <input type="checkbox" id="lowPower">
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="setting-group">
+    <h2>🔔 Notifications</h2>
+    <div class="setting">
+      <label for="notifications">Enable Notifications:</label>
+      <input type="checkbox" id="notifications">
+    </div>
+  </div>
+
+  <!-- Privacy & Stealth -->
+  <div class="setting-group">
+    <h2>🕵️ Privacy & Stealth</h2>
+    <div class="setting">
+      <label for="cloakGoogle">Cloak Google / Drive:</label>
+      <input type="checkbox" id="cloakGoogle">
+    </div>
+    <div class="setting">
+      <label for="cloakClassroom">Cloak Classroom:</label>
+      <input type="checkbox" id="cloakClassroom">
+    </div>
+    <div class="setting">
+      <label for="cloakClasslink">Cloak ClassLink:</label>
+      <input type="checkbox" id="cloakClasslink">
+    </div>
+    <div class="setting">
+      <label for="cloakCanvas">Cloak Canvas:</label>
+      <input type="checkbox" id="cloakCanvas">
+    </div>
+    <div class="setting">
+      <label for="cloakClever">Cloak Clever:</label>
+      <input type="checkbox" id="cloakClever">
+    </div>
+    <div class="setting">
+      <label for="fakeTitle">Fake Page Title:</label>
+      <input type="text" id="fakeTitle" placeholder="Leave blank for default">
+    </div>
+  </div>
+
+  <!-- Advanced -->
+  <div class="setting-group">
+    <h2>🧠 Advanced</h2>
+    <div class="setting">
+      <button id="resetAll">Reset All Settings</button>
+    </div>
+  </div>
+
+  <!-- Fun Modes -->
+  <div class="setting-group">
+    <h2>🎉 PRTY Fun Modes</h2>
+    <div class="setting">
+      <label for="prtyMode">PRTY Mode:</label>
+      <input type="checkbox" id="prtyMode">
+    </div>
+    <div class="setting">
+      <label for="focusMode">Focus Mode:</label>
+      <input type="checkbox" id="focusMode">
+    </div>
+    <div class="setting">
+      <label for="movieNightMode">Movie Night Mode:</label>
+      <input type="checkbox" id="movieNightMode">
+    </div>
+  </div>
+
+</div>
+
+<script src="js/settings.js"></script>
+</body>
+</html>
