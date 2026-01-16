@@ -69,3 +69,10 @@ updatePrtyActivity();
 // Auto update every 15 seconds
 setInterval(updatePrtyActivity, 15000);
 
+// Panic Mode Shortcut: CTRL + L
+document.addEventListener('keydown', function(e) {
+  // Check if CTRL + L is pressed
+  if (e.ctrlKey && e.key.toLowerCase() === 'l') {
+    window.location.href = 'https://www.classlink.com';
+  }
+});
