@@ -269,3 +269,60 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ===== Movies Page Loading Screen ===== */
+#movie-loading {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #111, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+}
+
+.movie-loader {
+  text-align: center;
+  font-size: 1.6rem;
+  animation: fadePulse 1.5s infinite;
+}
+
+.movie-loader small {
+  display: block;
+  opacity: 0.6;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+@keyframes fadePulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* ===== Movie Card Micro-Interactions ===== */
+.movie-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.movie-card:active {
+  transform: scale(0.97);
+}
+
+.movie-section {
+  margin: 30px 0 10px;
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+.movie-note {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 4px;
+}
