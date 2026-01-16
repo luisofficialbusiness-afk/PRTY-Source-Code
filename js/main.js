@@ -76,3 +76,24 @@ document.addEventListener('keydown', function(e) {
     window.location.href = 'https://www.classlink.com';
   }
 });
+
+// ===== Movies Page Loading Screen =====
+if (document.getElementById("movie-loading")) {
+  const moviePhrases = [
+    "Lights off. Movie on.",
+    "Loading questionable content…",
+    "AfterPRTY Cinema booting",
+    "Background noise loading",
+    "This seemed like a good idea"
+  ];
+
+  document.getElementById("movie-loading-text").innerText =
+    moviePhrases[Math.floor(Math.random() * moviePhrases.length)];
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("movie-loading").style.display = "none";
+    }, 900);
+  });
+}
+
