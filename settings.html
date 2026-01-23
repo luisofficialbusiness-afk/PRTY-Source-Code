@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PRTY Settings</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="settings-page">
+
+<div class="settings-container">
+  <div class="settings-header">
+    <h1>⚙️ PRTY Settings</h1>
+    <p>Customize your PRTY experience</p>
+  </div>
+
+  <!-- THEMES -->
+  <div class="settings-card">
+    <h2>🎨 Themes</h2>
+    <select onchange="setTheme(this.value)">
+      <option value="dark">Dark (Default)</option>
+      <option value="light">Light</option>
+      <option value="red">Red</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="purple">Purple</option>
+      <option value="prty">PRTY Mode 🎉</option>
+    </select>
+  </div>
+
+  <!-- CLOAK -->
+  <div class="settings-card">
+    <h2>🕶️ Tab Cloak</h2>
+    <div class="button-row">
+      <button onclick="cloakPreset('ClassLink')">ClassLink</button>
+      <button onclick="cloakPreset('Google')">Google</button>
+      <button onclick="cloakPreset('Canvas')">Canvas</button>
+    </div>
+
+    <h3>Custom Cloak</h3>
+    <input placeholder="Custom Tab Title" oninput="setCustomTitle(this.value)">
+    <input placeholder="Favicon URL (.ico / .png)" oninput="setCustomIcon(this.value)">
+  </div>
+
+  <!-- REPORT -->
+  <div class="settings-card">
+    <h2>🚨 Report an Issue</h2>
+    <p>Broken movie or manga?</p>
+    <button onclick="reportIssue()">Report Problem</button>
+  </div>
+
+  <!-- FUN BUTTON -->
+  <div class="settings-card fun-card">
+    <h2>🎉 Absolutely Useless Button</h2>
+    <button onclick="doNothing()">Do Not Click</button>
+  </div>
+</div>
+
+<script src="js/settings.js"></script>
+</body>
+</html>
