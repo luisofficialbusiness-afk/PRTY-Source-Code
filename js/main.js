@@ -36,15 +36,15 @@ function launchPRTY(url) {
 
 // ⭐ PRTY Activity Bar Logic
 const prtyActivityMessages = [
-  "Someone is definitely playing games rn 🎮",
-  "Movies page getting love 🍿",
-  "PRTY is alive and kicking",
+  "Supercalifragicex, wait i forgot the rest",
+  "Why are you so bored blud",
+  "PRTY DOES NOT WORK, jk",
   "Bug Hunters probably cooking 🐛",
   "GG chat",
   "AfterPRTY energy detected ✨",
   "If you're here, you're already bored",
   "This site exists. Somehow.",
-  "Mr Beast still hasn't sent money"
+  "hola amigo"
 ];
 
 function updatePrtyActivity() {
