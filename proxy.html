@@ -5,7 +5,8 @@
   <link rel="icon" type="image/png" href="assets/canvascloak.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+
+<body class="proxy-page">
 
 <!-- SIDEBAR (UNCHANGED) -->
 <div class="sidebar" id="sidebar">
@@ -22,21 +23,13 @@
 
 <button class="toggle" onclick="toggleSidebar()">☰</button>
 
-<!-- MAIN CONTENT -->
-<div class="main">
-
-  <h1 class="title">🌐 PRTY Proxy (Beta)</h1>
-
-<div class="proxy-app">
-  <iframe
-    src="https://prty-learning.vercel.app"
-    loading="lazy"
-    referrerpolicy="no-referrer"
-    allowfullscreen
-  ></iframe>
-</div>
-
-</div>
+<!-- FULLSCREEN PROXY -->
+<iframe
+  id="proxy-iframe"
+  src="https://prty-learning.vercel.app"
+  referrerpolicy="no-referrer"
+  allowfullscreen
+></iframe>
 
 <script src="js/main.js"></script>
 </body>
