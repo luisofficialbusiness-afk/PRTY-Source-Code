@@ -1,86 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY – Apps</title>
+  <title>PRTY - Apps</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    
-    .under-construction {
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #00ffff;
-    }
-
-    .under-construction h1 {
-      font-size: 3em;
-      text-shadow: 0 0 20px #ff00cc, 0 0 30px #00ffff;
-      margin-bottom: 15px;
-    }
-
-    .under-construction p {
-      font-size: 1.5em;
-      margin-bottom: 30px;
-    }
-
-    .under-construction .icon {
-      font-size: 5em;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .back-home {
-      padding: 12px 25px;
-      background: linear-gradient(45deg, #ff00cc, #00ffff);
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,0,255,0.5);
-      transition: 0.25s ease;
-    }
-
-    .back-home:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0,255,255,0.7);
-    }
-  </style>
 </head>
 <body>
-  <!-- General PRTY Loading Screen -->
+
 <div id="loading-screen-prty">
   <div id="loading-text-prty"></div>
 </div>
 
-<!-- SIDEBAR -->
+<!-- SIDEBAR (UNCHANGED) -->
 <div class="sidebar" id="sidebar">
   <h2>PRTY</h2>
   <a href="index.html">Home</a>
   <a href="games.html">Games</a>
-  <a href="apps.html">Apps</a>
+  <a href="apps.html" class="active">Apps</a>
   <a href="movies.html">Movies</a>
-    <a href="manga.html">Manga & Books (Google Drive)</a>
+  <a href="manga.html">Manga & Books (Google Drive)</a>
   <a href="proxy.html">Proxy</a>
   <a href="credits.html">Credits</a>
 </div>
 
 <button class="toggle" onclick="toggleSidebar()">☰</button>
 
-
 <div class="main">
-  <div class="under-construction">
-    <div class="icon">🚧</div>
-    <h1>Apps Under Construction</h1>
-    <p>We’re building this section! Come back soon for amazing apps.</p>
-    <a class="back-home" href="index.html">← Back to Home</a>
+  <h1 class="page-title">🧩 Apps</h1>
+
+  <div class="grid">
+
+    <!-- PRTY PROXY -->
+    <div class="card app-card" onclick="launchProxy()">
+      <img src="assets/proxy.png">
+      <div class="game-title">PRTY Proxy (Beta)</div>
+    </div>
+
+    <!-- PLACEHOLDER APPS -->
+    <div class="card app-card">
+      <img src="images/soon.png">
+      <div class="game-title">App Placeholder</div>
+    </div>
+
+    <div class="card app-card">
+      <img src="images/soon.png">
+      <div class="game-title">App Placeholder</div>
+    </div>
+
+    <div class="card app-card">
+      <img src="images/soon.png">
+      <div class="game-title">App Placeholder</div>
+    </div>
+
+    <div class="card app-card">
+      <img src="images/soon.png">
+      <div class="game-title">Coming Soon</div>
+    </div>
+
   </div>
 </div>
 
