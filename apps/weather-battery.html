@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather & Battery</title>
+  <style>
+    body {
+      background: #0b0f1a;
+      color: #fff;
+      font-family: Arial;
+      padding: 20px;
+    }
+    .card {
+      background: #141a2e;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>System Info</h1>
+
+<div class="card">
+  <h2>Battery</h2>
+  <p id="battery">Loading...</p>
+</div>
+
+<div class="card">
+  <h2>Weather</h2>
+  <p id="weather">Loading weather...</p>
+</div>
+
+<script>
+// BATTERY
+if (navigator.getBattery) {
+  navigator.getBattery().then(b => {
+    document.getElementById("battery").innerText =
+      Math.round(b.level * 100) + "% " + (b.charging ? "(Charging)" : "");
+  });
+} else {
+  document.getElementById("battery").innerText = "Battery info unavailable";
+}
+
+// WEATHER (Open-Meteo)
+navigator.geolocation.getCurrentPosition(pos => {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+    .then(r => r.json())
+    .then(data => {
+      const w = data.current_weather;
+      document.getElementById("weather").innerText =
+        `Temperature: ${w.temperature}°C | Wind: ${w.windspeed} km/h`;
+    })
+    .catch(() => {
+      document.getElementById("weather").innerText = "Weather unavailable";
+    });
+}, () => {
+  document.getElementById("weather").innerText = "Location permission denied";
+});
+</script>
+
+</body>
+</html>
