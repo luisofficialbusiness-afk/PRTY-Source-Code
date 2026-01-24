@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timer & Stopwatch</title>
+  <style>
+    body {
+      background: #0b0f1a;
+      color: #fff;
+      font-family: Arial;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 10px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      background: #00eaff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Stopwatch</h1>
+<div id="time">0.0</div>
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+<button onclick="reset()">Reset</button>
+
+<script>
+let t = 0, i;
+function start(){
+  if(!i) i = setInterval(()=>{
+    t += 0.1;
+    time.innerText = t.toFixed(1);
+  },100);
+}
+function stop(){
+  clearInterval(i);
+  i = null;
+}
+function reset(){
+  stop();
+  t = 0;
+  time.innerText = "0.0";
+}
+</script>
+
+</body>
+</html>
