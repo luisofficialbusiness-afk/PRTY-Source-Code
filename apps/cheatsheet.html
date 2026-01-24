@@ -4,31 +4,84 @@
   <title>Cheat Sheet</title>
   <style>
     body {
+      margin: 0;
       background: #0b0f1a;
       color: #fff;
       font-family: Arial;
-      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #141a2e;
+      padding: 10px;
+    }
+    .sidebar button {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 8px;
+      border: none;
+      background: #1f2540;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 6px;
     }
     textarea {
-      width: 100%;
-      height: 100vh;
-      padding: 15px;
+      flex: 1;
       background: #0b0f1a;
       color: #fff;
       border: none;
-      resize: none;
+      padding: 15px;
       font-size: 1rem;
+      resize: none;
     }
   </style>
 </head>
 <body>
 
-<textarea id="sheet" placeholder="Write your cheat sheet here..."></textarea>
+<div class="sidebar">
+  <button onclick="loadPreset('periodic')">Periodic Table</button>
+  <button onclick="loadPreset('math')">Math Equations</button>
+  <button onclick="loadPreset('physics')">Physics Constants</button>
+  <button onclick="clearSheet()">Clear</button>
+</div>
+
+<textarea id="sheet"></textarea>
 
 <script>
-const s = document.getElementById("sheet");
-s.value = localStorage.getItem("prty_cheat") || "";
-s.oninput = () => localStorage.setItem("prty_cheat", s.value);
+const sheet = document.getElementById("sheet");
+
+const presets = {
+  periodic: `H He Li Be B C N O F Ne
+Na Mg Al Si P S Cl Ar
+K Ca Sc Ti V Cr Mn Fe Co Ni`,
+  math: `Quadratic Formula:
+x = (-b ± √(b² - 4ac)) / 2a
+
+Area of Circle:
+A = πr²
+
+Pythagorean Theorem:
+a² + b² = c²`,
+  physics: `Speed of Light: 3.0 × 10^8 m/s
+Gravity: 9.8 m/s²
+Planck Constant: 6.626 × 10^-34 Js`
+};
+
+function loadPreset(p){
+  sheet.value = presets[p];
+  save();
+}
+function save(){
+  localStorage.setItem("prty_cheat", sheet.value);
+}
+function clearSheet(){
+  sheet.value = "";
+  save();
+}
+
+sheet.value = localStorage.getItem("prty_cheat") || "";
+sheet.oninput = save;
 </script>
 
 </body>
