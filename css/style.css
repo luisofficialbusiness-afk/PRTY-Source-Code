@@ -533,38 +533,32 @@ body.prty {
 }
 
 /* =========================
-   PROXY PAGE STYLES
+   PROXY APP — THE FINAL SOLUTION (very tuff)
    ========================= */
 
-/* FORCE FULL HEIGHT FOR PROXY PAGE */
-html, body {
-  height: 100%;
-}
-
-.main {
-  min-height: 100vh;
-}
-
-/* PROXY FULLSCREEN FIX */
-.proxy-container {
-  width: 100%;
-  height: calc(100vh - 80px); /* adjust if needed */
-  margin-top: 10px;
-  border-radius: 16px;
+body.proxy-page {
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 0 30px rgba(0,255,255,0.15);
 }
 
-.proxy-container iframe {
+body.proxy-page .main {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+body.proxy-page .proxy-app {
+  position: fixed;
+  top: 0;
+  left: 220px; /* sidebar width — adjust if needed */
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+}
+
+body.proxy-page .proxy-app iframe {
   width: 100%;
   height: 100%;
   border: none;
   display: block;
+  background: #000;
 }
-
-
-
-
-
-
