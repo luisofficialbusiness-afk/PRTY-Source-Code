@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY - Proxy</title>
+  <title>PRTY Proxy</title>
+  <link rel="icon" type="image/png" href="assets/canvascloak.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  
-<div id="loading-screen-prty">
-  <div id="loading-text-prty"></div>
-</div>
 
+<!-- SIDEBAR (UNCHANGED) -->
 <div class="sidebar" id="sidebar">
   <h2>PRTY</h2>
   <a href="index.html">Home</a>
   <a href="games.html">Games</a>
-  <a href="apps.html">Apps</a>
-  <a href="movies.html">Movies</a>
-  <a href="proxy.html">Proxy</a>
+  <a href="apps.html">Apps (50%)</a>
+  <a href="movies.html">Movies (Google Drive)</a>
+  <a href="manga.html">Manga & Books (Google Drive)</a>
+  <a href="proxy.html" class="active">Proxy</a>
   <a href="credits.html">Credits</a>
+  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
 </div>
 
 <button class="toggle" onclick="toggleSidebar()">☰</button>
 
+<!-- MAIN CONTENT -->
 <div class="main">
-<h1 class="page-title">🌐 Proxy Links</h1>
-<div class="grid">
-<script>
-for(let i=1;i<=20;i++){
-  document.write(`<div class="card">Proxy ${i}</div>`);
-}
-</script>
-</div>
+
+  <h1 class="title">🌐 PRTY Proxy (Beta)</h1>
+
+  <div class="proxy-container">
+    <iframe
+      src="https://prty-learning.vercel.app"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      allowfullscreen
+    ></iframe>
+  </div>
+
 </div>
 
 <script src="js/main.js"></script>
