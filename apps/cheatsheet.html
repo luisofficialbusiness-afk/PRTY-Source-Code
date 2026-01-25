@@ -1,87 +1,270 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cheat Sheet</title>
+  <title>PRTY Cheat Sheet</title>
   <style>
     body {
       margin: 0;
       background: #0b0f1a;
       color: #fff;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       display: flex;
       height: 100vh;
     }
+
+    /* LEFT SIDEBAR */
     .sidebar {
-      width: 220px;
+      width: 260px;
       background: #141a2e;
-      padding: 10px;
+      padding: 12px;
+      overflow-y: auto;
+      border-right: 1px solid #1f2540;
     }
+
+    .sidebar h3 {
+      margin: 10px 0 6px;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
     .sidebar button {
       width: 100%;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       padding: 8px;
       border: none;
       background: #1f2540;
       color: #fff;
       cursor: pointer;
       border-radius: 6px;
+      font-size: 0.85rem;
     }
+
+    .sidebar button:hover {
+      background: #2a3170;
+    }
+
+    .danger {
+      background: #c62828 !important;
+    }
+
+    /* MAIN AREA */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TABS BAR */
+    .tabs {
+      display: flex;
+      background: #0f1325;
+      border-bottom: 1px solid #1f2540;
+      overflow-x: auto;
+    }
+
+    .tab {
+      padding: 8px 12px;
+      cursor: pointer;
+      background: #141a2e;
+      border-right: 1px solid #1f2540;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      background: #1f2540;
+    }
+
+    .tab span {
+      font-size: 0.85rem;
+    }
+
+    .tab .close {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .tab .close:hover {
+      opacity: 1;
+    }
+
+    .add-tab {
+      padding: 8px 12px;
+      cursor: pointer;
+      background: #141a2e;
+      font-weight: bold;
+    }
+
+    /* EDITOR */
     textarea {
       flex: 1;
       background: #0b0f1a;
       color: #fff;
       border: none;
-      padding: 15px;
+      padding: 18px;
       font-size: 1rem;
       resize: none;
+      outline: none;
+      line-height: 1.5;
+    }
+
+    input[type="file"] {
+      display: none;
     }
   </style>
 </head>
 <body>
 
+<!-- PRESETS SIDEBAR -->
 <div class="sidebar">
-  <button onclick="loadPreset('periodic')">Periodic Table</button>
-  <button onclick="loadPreset('math')">Math Equations</button>
-  <button onclick="loadPreset('physics')">Physics Constants</button>
-  <button onclick="clearSheet()">Clear</button>
+  <h3>Math</h3>
+  <button onclick="loadPreset('algebra')">Algebra</button>
+  <button onclick="loadPreset('geometry')">Geometry</button>
+  <button onclick="loadPreset('trig')">Trigonometry</button>
+
+  <h3>Physics</h3>
+  <button onclick="loadPreset('motion')">Motion</button>
+  <button onclick="loadPreset('electric')">Electricity</button>
+
+  <h3>Chemistry</h3>
+  <button onclick="loadPreset('periodic')">Periodic Trends</button>
+  <button onclick="loadPreset('gas')">Gas Laws</button>
+
+  <h3>Tools</h3>
+  <button onclick="exportTab()">Export Current Tab</button>
+  <button onclick="triggerImport()">Import Into Tab</button>
+  <button class="danger" onclick="deleteTab()">Delete Tab</button>
+
+  <input type="file" id="fileInput" accept=".txt">
 </div>
 
-<textarea id="sheet"></textarea>
+<!-- MAIN -->
+<div class="main">
+  <div class="tabs" id="tabs"></div>
+  <textarea id="editor" placeholder="Start typing..."></textarea>
+</div>
 
 <script>
-const sheet = document.getElementById("sheet");
+/* ===== DATA ===== */
+let tabs = JSON.parse(localStorage.getItem("prty_tabs")) || [
+  { id: Date.now(), name: "Cheat 1", content: "" }
+];
+let activeTab = tabs[0].id;
 
+const editor = document.getElementById("editor");
+const tabsBar = document.getElementById("tabs");
+const fileInput = document.getElementById("fileInput");
+
+/* ===== PRESETS ===== */
 const presets = {
-  periodic: `H He Li Be B C N O F Ne
-Na Mg Al Si P S Cl Ar
-K Ca Sc Ti V Cr Mn Fe Co Ni`,
-  math: `Quadratic Formula:
-x = (-b ± √(b² - 4ac)) / 2a
-
-Area of Circle:
-A = πr²
-
-Pythagorean Theorem:
-a² + b² = c²`,
-  physics: `Speed of Light: 3.0 × 10^8 m/s
-Gravity: 9.8 m/s²
-Planck Constant: 6.626 × 10^-34 Js`
+  algebra: `x = (-b ± √(b² - 4ac)) / 2a`,
+  geometry: `Area Circle = πr²\nTriangle = ½bh`,
+  trig: `sin²θ + cos²θ = 1\nSOH CAH TOA`,
+  motion: `v = u + at\ns = ut + ½at²`,
+  electric: `V = IR\nP = VI`,
+  periodic: `Atomic size ↓ across\nElectronegativity ↑ across`,
+  gas: `PV = nRT`
 };
 
-function loadPreset(p){
-  sheet.value = presets[p];
-  save();
-}
-function save(){
-  localStorage.setItem("prty_cheat", sheet.value);
-}
-function clearSheet(){
-  sheet.value = "";
-  save();
+/* ===== FUNCTIONS ===== */
+function renderTabs() {
+  tabsBar.innerHTML = "";
+  tabs.forEach(tab => {
+    const el = document.createElement("div");
+    el.className = "tab" + (tab.id === activeTab ? " active" : "");
+    el.innerHTML = `<span>${tab.name}</span><span class="close">×</span>`;
+    el.onclick = () => switchTab(tab.id);
+    el.querySelector(".close").onclick = e => {
+      e.stopPropagation();
+      removeTab(tab.id);
+    };
+    tabsBar.appendChild(el);
+  });
+
+  const add = document.createElement("div");
+  add.className = "add-tab";
+  add.textContent = "+";
+  add.onclick = newTab;
+  tabsBar.appendChild(add);
 }
 
-sheet.value = localStorage.getItem("prty_cheat") || "";
-sheet.oninput = save;
+function switchTab(id) {
+  saveContent();
+  activeTab = id;
+  editor.value = tabs.find(t => t.id === id).content;
+  renderTabs();
+}
+
+function newTab() {
+  const name = prompt("Tab name?");
+  if (!name) return;
+  const tab = { id: Date.now(), name, content: "" };
+  tabs.push(tab);
+  activeTab = tab.id;
+  editor.value = "";
+  saveAll();
+  renderTabs();
+}
+
+function removeTab(id) {
+  if (tabs.length === 1) return alert("At least one tab required.");
+  tabs = tabs.filter(t => t.id !== id);
+  activeTab = tabs[0].id;
+  editor.value = tabs[0].content;
+  saveAll();
+  renderTabs();
+}
+
+function deleteTab() {
+  removeTab(activeTab);
+}
+
+function saveContent() {
+  const tab = tabs.find(t => t.id === activeTab);
+  if (tab) tab.content = editor.value;
+  saveAll();
+}
+
+function saveAll() {
+  localStorage.setItem("prty_tabs", JSON.stringify(tabs));
+}
+
+function loadPreset(name) {
+  editor.value = presets[name];
+  saveContent();
+}
+
+function exportTab() {
+  const blob = new Blob([editor.value], { type: "text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "prty-cheat.txt";
+  a.click();
+}
+
+function triggerImport() {
+  fileInput.click();
+}
+
+fileInput.onchange = () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    editor.value = e.target.result;
+    saveContent();
+  };
+  reader.readAsText(file);
+};
+
+editor.oninput = saveContent;
+
+/* INIT */
+editor.value = tabs.find(t => t.id === activeTab).content;
+renderTabs();
 </script>
 
 </body>
