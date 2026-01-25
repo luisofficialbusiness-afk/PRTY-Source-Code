@@ -78,8 +78,9 @@ button {
   <div class="header">🤖 PRTY AI</div>
   <div class="chat" id="chat"></div>
   <div class="input">
-    <input id="input" placeholder="Say something..." onkeydown="if(event.key==='Enter')send()">
-    <button onclick="send()">Send</button>
+    <input id="ai-input" placeholder="Say something..." />
+<button onclick="handleSend()">Send</button>
+<div id="chat"></div>
   </div>
 </div>
 
