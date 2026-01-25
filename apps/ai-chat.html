@@ -1,130 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>PRTY AI</title>
-
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at top, #14162b, #070814);
-  font-family: Arial, sans-serif;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ai-box {
-  width: 420px;
-  background: #0e1022;
-  border-radius: 16px;
-  box-shadow: 0 0 30px rgba(0,255,255,.15);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.header {
-  padding: 14px;
-  background: linear-gradient(90deg, #00ffff, #ff8cff);
-  color: black;
-  font-weight: bold;
-  text-align: center;
-}
-
-.chat {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-}
-
-.msg {
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-}
-
-.user { color: #00ffff; }
-.bot  { color: #ff8cff; }
-
-.input {
-  display: flex;
-  border-top: 1px solid #222;
-}
-
-input {
-  flex: 1;
-  padding: 12px;
-  background: #070814;
-  border: none;
-  color: white;
-  outline: none;
-}
-
-button {
-  padding: 12px 16px;
-  border: none;
-  background: #00ffff;
-  cursor: pointer;
-  font-weight: bold;
-}
-</style>
+  <title>PRTY AI</title>
+  <style>
+    body {
+      background: #0b0b0b;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    #chat {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #333;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .user { color: #6cf; margin: 5px 0; }
+    .ai { color: #f6c; margin: 5px 0; }
+    input {
+      width: 80%;
+      padding: 10px;
+      background: #111;
+      color: white;
+      border: 1px solid #333;
+    }
+    button {
+      padding: 10px;
+      background: #f6c;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="ai-box">
-  <div class="header">🤖 PRTY AI</div>
-  <div class="chat" id="chat"></div>
-  <div class="input">
-    <input id="ai-input" placeholder="Say something..." />
-<button onclick="handleSend()">Send</button>
+<h2>PRTY AI</h2>
+
 <div id="chat"></div>
-  </div>
-</div>
+
+<input id="ai-input" placeholder="Say something..." />
+<button onclick="sendMessage()">Send</button>
 
 <script>
 const input = document.getElementById("ai-input");
 const chat = document.getElementById("chat");
 
-function addMessage(sender, text) {
+function addMessage(cls, text) {
   const div = document.createElement("div");
-  div.innerText = `${sender}: ${text}`;
+  div.className = cls;
+  div.innerText = text;
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-async function handleSend() {
-  const message = input.value.trim();
-  if (!message) return;
+async function sendMessage() {
+  const msg = input.value.trim();
+  if (!msg) return;
 
-  addMessage("You", message);
+  addMessage("user", "You: " + msg);
   input.value = "";
 
-  addMessage("PRTY AI", "typing...");
+  addMessage("ai", "PRTY AI: typing…");
 
   try {
-    const res = await fetch("/api/chat", {
+    const res = await fetch("/api/ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message: msg })
     });
 
     const data = await res.json();
-
     chat.lastChild.remove();
-    addMessage("PRTY AI", data.reply);
+    addMessage("ai", "PRTY AI: " + data.reply);
 
   } catch {
     chat.lastChild.remove();
-    addMessage("PRTY AI", "PRTY AI is tired rn 😴");
+    addMessage("ai", "PRTY AI: tired rn 😴");
   }
 }
 
-// ENTER KEY SUPPORT
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") handleSend();
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") sendMessage();
 });
 </script>
 
