@@ -225,3 +225,9 @@ function launchProxy() {
   win.location.href = "https://prty-learning.b-cdn.net/";
 }
 
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("closed");
+}
+
+
