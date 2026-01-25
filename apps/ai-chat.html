@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRTY AI</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #14162b, #070814);
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ai-box {
+  width: 420px;
+  background: #0e1022;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0,255,255,.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  padding: 14px;
+  background: linear-gradient(90deg, #00ffff, #ff8cff);
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chat {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.msg {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.user { color: #00ffff; }
+.bot  { color: #ff8cff; }
+
+.input {
+  display: flex;
+  border-top: 1px solid #222;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  background: #070814;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  background: #00ffff;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="ai-box">
+  <div class="header">🤖 PRTY AI (Offline)</div>
+  <div class="chat" id="chat"></div>
+  <div class="input">
+    <input id="input" placeholder="Say something..." onkeydown="if(event.key==='Enter')send()">
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+
+const responses = {
+  hello: [
+    "yo 👋",
+    "hey there",
+    "what’s up",
+    "hi hi"
+  ],
+  bored: [
+    "yeah same 😭",
+    "try a game",
+    "PRTY exists for a reason yk",
+    "sounds like a you problem ngl"
+  ],
+  prty: [
+    "PRTY >>> everything else",
+    "you already know PRTY clears",
+    "best site fr"
+  ],
+  help: [
+    "what do you need",
+    "I gotchu",
+    "say less"
+  ],
+  default: [
+    "idk but that’s wild",
+    "real.",
+    "interesting take",
+    "I hear you",
+    "fr?"
+  ]
+};
+
+function botReply(text) {
+  let key = "default";
+  if (text.includes("hi") || text.includes("hello")) key = "hello";
+  if (text.includes("bored")) key = "bored";
+  if (text.includes("prty")) key = "prty";
+  if (text.includes("help")) key = "help";
+
+  const reply = responses[key][Math.floor(Math.random()*responses[key].length)];
+
+  setTimeout(() => {
+    addMsg("PRTY AI", reply, "bot");
+  }, 600);
+}
+
+function addMsg(user, text, cls) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.innerText = `${user}: ${text}`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function send() {
+  const input = document.getElementById("input");
+  const text = input.value.trim().toLowerCase();
+  if (!text) return;
+  addMsg("You", text, "user");
+  input.value = "";
+  botReply(text);
+}
+</script>
+
+</body>
+</html>
