@@ -46,9 +46,9 @@ function launchPRTY(url) {
 
   /* 🔧 MANUAL COUNTS (EDIT THESE) */
   const PRTY_STATS = {
-    games: 60,
-    movies: 25,
-    manga: 19
+    games: 34,
+    movies: 5,
+    manga: 5
   };
 
   const hour = new Date().getHours();
