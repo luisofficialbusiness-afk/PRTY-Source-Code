@@ -64,7 +64,6 @@ function launchPRTY(url) {
     "🌙 late night PRTY session",
     "🌙 go to sleep (or don’t)",
     "🌙 night mode energy"
-    "🌙 SLEEP"
   ];
 
   const generalMessages = [
