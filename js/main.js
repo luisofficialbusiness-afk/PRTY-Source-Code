@@ -46,7 +46,7 @@ function launchPRTY(url) {
 
   /* 🔧 MANUAL COUNTS (EDIT THESE) */
   const PRTY_STATS = {
-    games: 34,
+    games: 44,
     movies: 5,
     manga: 5
   };
