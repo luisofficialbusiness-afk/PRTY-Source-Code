@@ -46,3 +46,27 @@
   padding: 15px;
   box-shadow: 0 0 30px rgba(0,255,255,0.25);
 }
+
+.radio-proxy {
+  margin-top: 25px;
+}
+
+.radio-proxy p {
+  margin-bottom: 10px;
+}
+
+.radio-proxy button {
+  backround: linear-gradient(135deg, #ff00cc, #00ffff);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0,255,255,0.4);
+  transition: transform 0.2s ease;
+}
+
+.radio-proxy button:hover {
+  transform: scale(1.05);
+}
