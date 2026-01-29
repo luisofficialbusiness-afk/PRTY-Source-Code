@@ -38,11 +38,6 @@ function openRadioProxy() {
     );
 }
 
-
-Luis Cruz <luisofficialbusiness@gmail.com>
-5:38 PM (0 minutes ago)
-to me
-
 function speakPRTY(message) {
   if (!("speechSynthesis" in window)) return;
 
