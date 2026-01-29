@@ -1,0 +1,48 @@
+.radio-main {
+  padding: 40px;
+  text-align: center;
+}
+
+.radio-title {
+  font-size: 2.5rem;
+  color: #00ffff;
+  text-shadow: 0 0 12px #ff00cc;
+}
+
+.radio-subtitle {
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.radio-stations {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.radio-stations button {
+  background: linear-gradient(135deg, #ff00cc, #00ffff);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.radio-stations button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,0,204,0.6);
+}
+
+.radio-player {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #000;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.25);
+}
