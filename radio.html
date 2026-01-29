@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PRTY Radio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/radio.css">
+</head>
+<body>
+
+<!-- Sidebar (same as rest of PRTY) -->
+<div class="sidebar" id="sidebar">
+  <h2>PRTY</h2>
+  <a href="index.html">Home</a>
+  <a href="games.html">Games</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="radio.html">PRTY Radio</a>
+  <a href="credits.html">Credits</a>
+</div>
+
+<button class="toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="main radio-main">
+
+  <h1 class="radio-title">🎧 PRTY Radio</h1>
+  <p class="radio-subtitle">Sit back. Press play. Vibe.</p>
+
+  <!-- Station Buttons -->
+  <div class="radio-stations">
+    <button onclick="loadStation(0)">🔥 Main</button>
+    <button onclick="loadStation(1)">🌙 Late Night</button>
+    <button onclick="loadStation(2)">⚡ Energy</button>
+    <button onclick="loadStation(3)">🧊 Chill</button>
+  </div>
+
+  <!-- Player -->
+  <div class="radio-player">
+    <iframe
+      id="radio-frame"
+      width="100%"
+      height="300"
+      scrolling="no"
+      frameborder="no"
+      allow="autoplay"
+    ></iframe>
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/radio.js"></script>
+</body>
+</html>
