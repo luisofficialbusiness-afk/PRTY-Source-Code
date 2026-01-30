@@ -60,3 +60,8 @@ function speakPRTY(message) {
 function playStation(name) {
   speakPRTY(`Thank you for tuning in to PRTY Radio ${name}`);
 }
+
+function selectStation(index, name) {
+  loadStation(index);
+  playStation(name);
+}
