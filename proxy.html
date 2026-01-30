@@ -1,138 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>PRTY Error</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy</title>
+  <link rel="icon" type="image/png" href="assets/canvascloak.png">
+  <link rel="stylesheet" href="css/style.css">
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
+    :root {
+      --prty-bg-1: #0f172a;   /* exact dark blue */
+      --prty-bg-2: #1e3a8a;   /* exact gradient blue */
+      --prty-accent: #2563eb; /* exact button blue */
+    }
+
+    /* Fullscreen iframe behind everything */
+    .proxy-frame {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: background 0.4s ease;
-    }
-
-    .box {
-      max-width: 600px;
-      padding: 40px;
-      border-radius: 16px;
-      background: rgba(0,0,0,0.35);
-      box-shadow: 0 0 40px rgba(0,0,0,0.5);
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin: 0;
-    }
-
-    h2 {
-      margin: 10px 0;
-      opacity: 0.9;
-    }
-
-    p {
-      opacity: 0.8;
-      font-size: 1.1rem;
-    }
-
-    button {
-      margin-top: 25px;
-      padding: 12px 22px;
-      font-size: 1rem;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      z-index: 1;
+    }
+
+    /* Container to the right of the sidebar */
+    .proxy-container {
+      position: fixed;
+      top: 0;
+      left: 250px; /* your sidebar width */
+      width: calc(100vw - 250px);
+      height: 100vh;
+      z-index: 9000;
+      pointer-events: none;
+    }
+
+    /* prty-learning gradient background */
+    .proxy-select-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--prty-bg-1), var(--prty-bg-2));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Floating white card */
+    .proxy-card {
       background: white;
-      color: black;
-      font-weight: bold;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+      width: 420px;
+      padding: 35px 40px;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      animation: fadeIn 0.4s ease;
     }
 
-    button:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
+    .proxy-card h1 {
+      margin: 0 0 25px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--prty-accent);
     }
 
-    /* COLOR THEMES */
-    .error-404 { background: linear-gradient(135deg, #4b2cff, #1a1a3d); }
-    .error-403 { background: linear-gradient(135deg, #ff0055, #2a0012); }
-    .error-500 { background: linear-gradient(135deg, #7a0000, #2a0000); }
-    .error-502 { background: linear-gradient(135deg, #ff8c00, #402200); }
-    .error-503 { background: linear-gradient(135deg, #ffd000, #403600); }
-    .error-504 { background: linear-gradient(135deg, #00e5ff, #002a30); }
-    .error-451 { background: linear-gradient(135deg, #777777, #222222); }
-    .error-418 { background: linear-gradient(135deg, #ff00ff, #00ffff); }
-    .error-prty { background: linear-gradient(135deg, #ff00cc, #330033); }
+    .proxy-card button {
+      width: 100%;
+      background: var(--prty-accent);
+      color: white;
+      border: none;
+      padding: 14px 0;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+
+    .proxy-card button:hover {
+      background: var(--prty-bg-2);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body>
 
-  <div class="box">
-    <h1 id="code">ERR</h1>
-    <h2 id="title">Something went wrong</h2>
-    <p id="phrase">The party got a little chaotic.</p>
-    <button id="actionBtn">Go Home</button>
+<body class="proxy-page">
+
+<!-- SIDEBAR (unchanged) -->
+<div class="sidebar" id="sidebar">
+  <h2>PRTY</h2>
+  <a href="index.html">Home</a>
+  <a href="games.html">Games</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="proxy.html">Proxy</a>
+  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+</div>
+
+<!-- SELECTOR -->
+<div class="proxy-container">
+  <div id="proxySelect" class="proxy-select-screen">
+    <div class="proxy-card">
+      <h1>Select a Proxy</h1>
+
+      <button onclick="
+        document.getElementById('proxyFrame').src='https://mathlete-education.b-cdn.net/';
+        document.getElementById('proxySelect').style.display='none';
+      ">
+        Scramjet
+      </button>
+
+      <button onclick="
+        document.getElementById('proxyFrame').src='https://prty-learning.b-cdn.net/';
+        document.getElementById('proxySelect').style.display='none';
+      ">
+        Ultraviolet
+      </button>
+    </div>
   </div>
+</div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    let code = params.get("code") || "404";
+<!-- FULLSCREEN IFRAME -->
+<iframe id="proxyFrame" class="proxy-frame" allow="fullscreen" loading="lazy"></iframe>
 
-    // 1 in 1,000,000 joke error
-    if (Math.floor(Math.random() * 1_000_000) === 777777) {
-      code = "418";
-    }
-
-    const phrases = [
-      "The party went too hard.",
-      "Someone spilled the punch.",
-      "PRTY took a wrong turn.",
-      "This wasn't on the guest list.",
-      "We swear it worked a second ago.",
-      "Certified PRTY moment."
-    ];
-
-    const errors = {
-      "404": { title: "Page Not Found", btn: "Back to Home" },
-      "403": { title: "Access Denied", btn: "Go Back" },
-      "500": { title: "Server Error", btn: "Reload Page" },
-      "502": { title: "Proxy Failed", btn: "Reset PRTY", reset: true },
-      "503": { title: "Service Unavailable", btn: "Try Again" },
-      "504": { title: "Request Timed Out", btn: "Retry" },
-      "451": { title: "Unavailable", btn: "Go Home" },
-      "418": { title: "I'm a Teapot ☕", btn: "Brew Tea" },
-      "PRTY-001": { title: "Party Overload", btn: "Retry Later", custom: true }
-    };
-
-    const data = errors[code] || errors["404"];
-
-    document.body.classList.add(`error-${code}`);
-    document.getElementById("code").textContent = code;
-    document.getElementById("title").textContent = data.title;
-    document.getElementById("phrase").textContent =
-      phrases[Math.floor(Math.random() * phrases.length)];
-
-    const btn = document.getElementById("actionBtn");
-    btn.textContent = data.btn;
-
-    btn.onclick = () => {
-      if (data.reset) {
-        localStorage.clear();
-        sessionStorage.clear();
-        location.href = "/";
-      } else if (code === "500") {
-        location.reload();
-      } else {
-        location.href = "/";
-      }
-    };
-  </script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
+mx3k3Oz.html
+4 KB
