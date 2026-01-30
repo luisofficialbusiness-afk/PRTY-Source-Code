@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PRTY Notepad</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0b0f1a;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      padding: 12px 16px;
+      background: linear-gradient(90deg, #ff5fd7, #00eaff);
+      color: #000;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header span {
+      font-size: 1.1rem;
+    }
+
+    .buttons button {
+      background: #0b0f1a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      margin-left: 6px;
+      cursor: pointer;
+    }
+
+    .buttons button:hover {
+      background: #141a2e;
+    }
+
+    textarea {
+      flex: 1;
+      width: 100%;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 16px;
+      font-size: 1rem;
+      background: #0b0f1a;
+      color: #eaeaea;
+    }
+
+    footer {
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      color: #777;
+      text-align: right;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <span>📝 PRTY Notepad</span>
+  <div class="buttons">
+    <button onclick="downloadNote()">Download</button>
+    <button onclick="clearNote()">Clear</button>
+  </div>
+</header>
+
+<textarea id="note" placeholder="Start typing..."></textarea>
+
+<footer>
+  Auto-saved locally
+</footer>
+
+<script>
+  const note = document.getElementById("note");
+
+  // Load saved text
+  note.value = localStorage.getItem("prty_notepad") || "";
+
+  // Auto-save
+  note.addEventListener("input", () => {
+    localStorage.setItem("prty_notepad", note.value);
+  });
+
+  function clearNote() {
+    if (confirm("Clear the notepad?")) {
+      note.value = "";
+      localStorage.removeItem("prty_notepad");
+    }
+  }
+
+  function downloadNote() {
+    const blob = new Blob([note.value], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "PRTY_Notepad.txt";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+</script>
+
+</body>
+</html>

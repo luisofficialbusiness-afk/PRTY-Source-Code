@@ -1,0 +1,33 @@
+.settings-card {
+  background: linear-gradient(135deg, #1b1b2f, #23234a);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.settings-card h2 {
+  margin-top: 0;
+  color: #00ffff;
+  text-shadow: 0 0 10px #ff00cc;
+}
+
+.settings-card button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff00cc, #00ffff);
+  color: #000;
+  transition: 0.2s ease;
+}
+
+.settings-card button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px #00ffff;
+}

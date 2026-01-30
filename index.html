@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY</title>
+  <title>Dashboard</title>
+  <link rel="icon" type="image/png" href="assets/canvascloak.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- SIDEBAR -->
+
 <div class="sidebar" id="sidebar">
   <h2>PRTY</h2>
   <a href="index.html">Home</a>
   <a href="games.html">Games</a>
-  <a href="apps.html">Apps (50%)</a>
-  <a href="movies.html">Movies (Google Drive)</a>
-  <a href="proxy.html">Proxy Links</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="proxy.html">Proxy</a>
   <a href="credits.html">Credits</a>
   <a href="music.html">Music</a>
   <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 </div>
 
-<button class="toggle" onclick="toggleSidebar()">☰</button>
 
-<!-- MAIN CONTENT -->
 <div class="main">
   <h1 class="title">PRTY</h1>
 
-  <!-- Live Clock & Date -->
+
   <div class="clock-box">
     <div id="date"></div>
     <div id="time"></div>
   </div>
 
-  <!-- Updates Section -->
+
+<div id="prty-activity-bar">
+  <span id="prty-activity-text">Loading PRTY activity...</span>
+</div>
+
   <div class="updates-section">
     <h2>PRTY Updates</h2>
-    <h3 class="subtitle">Updates - Website Release</h3>
+    <h3 class="subtitle">Updates - V1.4</h3>
     <ul class="updates-list">
-      <li>Added 10 Games </li>
-      <li>Trying to Add Movies/TV Shows</li>
-      <li>More Updates will be added soon</li>
+      <li>Added More Games, Movies, and Manga</li>
+      <li>Thomasplayz made a proxy so W in the chat</li>
+      <li>Refixed the sidebar</li>
+      <li>We also added PRTY AI</li>
 
       <p><strong>REPORT ANY BUGS</strong>, go to the discord and report ant game, website, or movie bug to PRTY Website Devs. Join our Bug Hunter Program! DM rveprty. or rveprty.main if you have any questions.</p>
-      <!-- Add more updates here -->
+
     </ul>
   </div>
 

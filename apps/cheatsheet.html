@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PRTY Cheat Sheet</title>
+<style>
+:root {
+  --bg: #0e0e11;
+  --panel: #151522;
+  --accent: #00ffff;
+  --accent2: #ff00cc;
+  --text: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0e0e11, #111827);
+  color: var(--text);
+}
+
+/* Header */
+header {
+  padding: 20px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent2);
+}
+
+/* Search */
+.search-container {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  width: 80%;
+  max-width: 600px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background: #1f1f2f;
+  color: white;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+
+/* Sections */
+.section {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 900px;
+  background: var(--panel);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.section-header {
+  padding: 15px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background: linear-gradient(90deg, #1b1b2f, #23234a);
+  color: var(--accent);
+}
+
+.section-content {
+  padding: 15px;
+  display: none;
+}
+
+.section-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section-content li {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.95rem;
+}
+
+/* Show */
+.section.open .section-content {
+  display: block;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  opacity: 0.6;
+  padding: 20px;
+  font-size: 0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>📘 PRTY Cheat Sheet</header>
+
+<div class="search-container">
+  <input id="search" placeholder="Search cheats (math, html, http, shortcuts...)">
+</div>
+
+<!-- SCHOOL -->
+<div class="section">
+  <div class="section-header">🏫 School</div>
+  <div class="section-content">
+    <ul>
+      <li>PEMDAS – Order of Operations</li>
+      <li>Pythagorean Theorem: a² + b² = c²</li>
+      <li>Area: rectangle = l×w, circle = πr²</li>
+      <li>Volume: cube = s³, cylinder = πr²h</li>
+      <li>Mean / Median / Mode</li>
+      <li>Distance = Rate × Time</li>
+      <li>Fraction ↔ Decimal ↔ Percent</li>
+      <li>Periodic Table basics</li>
+      <li>Metric prefixes (kilo → nano)</li>
+      <li>Temperature: °C ↔ °F ↔ K</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CODING -->
+<div class="section">
+  <div class="section-header">💻 Coding</div>
+  <div class="section-content">
+    <ul>
+      <li>HTML structure: html → head → body</li>
+      <li>HTML tags: div, span, a, img, input</li>
+      <li>CSS box model: margin, border, padding</li>
+      <li>CSS units: px, %, em, rem, vh, vw</li>
+      <li>Flexbox: justify-content, align-items</li>
+      <li>JS variables: let, const</li>
+      <li>JS arrays & objects</li>
+      <li>DOM: document.querySelector()</li>
+      <li>localStorage.getItem / setItem</li>
+      <li>Common JS errors (undefined, null)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- INTERNET -->
+<div class="section">
+  <div class="section-header">🌐 Internet</div>
+  <div class="section-content">
+    <ul>
+      <li>HTTP vs HTTPS</li>
+      <li>DNS = Domain Name System</li>
+      <li>IP address basics</li>
+      <li>CDN = Content Delivery Network</li>
+      <li>Cookies vs cache</li>
+      <li>VPN vs Proxy</li>
+      <li>HTTP status codes:</li>
+      <li>200 OK</li>
+      <li>301 Redirect</li>
+      <li>404 Not Found</li>
+      <li>429 Rate Limited</li>
+      <li>500 Server Error</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SHORTCUTS -->
+<div class="section">
+  <div class="section-header">⌨️ Keyboard Shortcuts</div>
+  <div class="section-content">
+    <ul>
+      <li>Ctrl + C / V / X – Copy / Paste / Cut</li>
+      <li>Ctrl + Z / Y – Undo / Redo</li>
+      <li>Ctrl + T – New tab</li>
+      <li>Ctrl + W – Close tab</li>
+      <li>Ctrl + Shift + T – Reopen tab</li>
+      <li>Ctrl + R – Refresh</li>
+      <li>Ctrl + Shift + I – DevTools</li>
+    </ul>
+  </div>
+</div>
+
+<!-- POWER USER -->
+<div class="section">
+  <div class="section-header">🔥 Power-User</div>
+  <div class="section-content">
+    <ul>
+      <li>Binary ↔ Decimal</li>
+      <li>ASCII table</li>
+      <li>File extensions (.html, .js, .png)</li>
+      <li>Resolution & aspect ratios</li>
+      <li>FPS vs refresh rate</li>
+      <li>Latency vs bandwidth</li>
+    </ul>
+  </div>
+</div>
+
+<footer>PRTY Cheat Sheet • Offline • Fast • No Tracking</footer>
+
+<script>
+/* Toggle sections */
+document.querySelectorAll('.section-header').forEach(h => {
+  h.onclick = () => h.parentElement.classList.toggle('open');
+});
+
+/* Search */
+const search = document.getElementById('search');
+search.addEventListener('input', () => {
+  const q = search.value.toLowerCase();
+  document.querySelectorAll('.section').forEach(section => {
+    let match = false;
+    section.querySelectorAll('li').forEach(li => {
+      const show = li.textContent.toLowerCase().includes(q);
+      li.style.display = show ? 'block' : 'none';
+      if (show) match = true;
+    });
+    section.style.display = match || q === '' ? 'block' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>

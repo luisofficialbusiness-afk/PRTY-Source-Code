@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY - Games</title>
+  <title>Dashboard</title>
+   <link rel="icon" type="image/png" href="assets/canvascloak.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="loading-screen">
-  <div id="loading-text"></div>
+  
+<div id="loading-screen-prty">
+  <div id="loading-text-prty"></div>
 </div>
-
 
 <div class="sidebar" id="sidebar">
   <h2>PRTY</h2>
   <a href="index.html">Home</a>
   <a href="games.html">Games</a>
   <a href="apps.html">Apps</a>
-  <a href="movies.html">Movies (Google Drive)</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
   <a href="proxy.html">Proxy</a>
   <a href="credits.html">Credits</a>
+  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 </div>
-
-<button class="toggle" onclick="toggleSidebar()">☰</button>
-
+  
 <div class="main">
   <h1 class="page-title">🎮 Games</h1>
 
@@ -169,14 +171,185 @@
   <div class="game-title">Coming Soon</div>
 </div>
 
-<div class="card" onclick="launchGame('games/game21.html')">
-  <img src="images/game21.png">
-  <div class="game-title">Coming Soon</div>
+        <div class="card" onclick="launchGame('games/Attack Hole.html')">
+  <img src="images/attackhole.png">
+  <div class="game-title">Attack Hole</div>
 </div>
+
+    <div class="card" onclick="launchGame('games/People Playground.html')">
+  <img src="images/peopleplayground.png">
+  <div class="game-title">People Playground</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Half Life.html')">
+  <img src="images/halflife.png">
+  <div class="game-title">Half-Life</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/3D Bolt Master.html')">
+  <img src="images/3dboldmaster.png">
+  <div class="game-title">3D Bolt Master</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Plants Vs Zombies.html')">
+  <img src="images/pvz.png">
+  <div class="game-title">Plants Vs  Zombies</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Magic Tiles 3.html')">
+  <img src="images/magictiles3.png">
+  <div class="game-title">Magic Tiles 3</div>
+</div>
+
+<div class="card" onclick="launchGame('games/DOOM.html')">
+  <img src="images/DOOM.png">
+  <div class="game-title">DOOM</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Slope.html')">
+  <img src="images/slope.png">
+  <div class="game-title">Slope</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Color Water Sort 3D.html')">
+  <img src="images/colorwatersort.png">
+  <div class="game-title">Color Water Sort 3D</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Cookie Clicker.html')">
+  <img src="images/cookieclicker.png">
+  <div class="game-title">Cookie Clicker</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Geometry Dash Lite.html')">
+  <img src="images/geometrydash_lite.png">
+  <div class="game-title">Geometry Dash Lite</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Doodle Jump.html')">
+  <img src="images/doodlejump.png">
+  <div class="game-title">Doodle Jump</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Crossy Road.html')">
+  <img src="images/crossyroad.png">
+  <div class="game-title">Crossy Road</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/CircloO.html')">
+  <img src="images/circloO.png">
+  <div class="game-title">CircloO</div>
+</div>
+
+        
+    <div class="card" onclick="launchGame('games/Cluster Rush.html')">
+  <img src="images/clustertruck.png">
+  <div class="game-title">Clustertruck</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Block Blast.html')">
+  <img src="images/blockblast.png">
+  <div class="game-title">Block Blast</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Basketball Stars.html')">
+  <img src="images/basketballstars.png">
+  <div class="game-title">Basketball Stars</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Slice it All.html')">
+  <img src="images/sliceitall.png">
+  <div class="game-title">Slice it All</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Ice Dodo.html')">
+  <img src="images/icedodo.png">
+  <div class="game-title">Ice Dodo</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Death Run 3D.html')">
+  <img src="images/deathrun3d.png">
+  <div class="game-title">Death Run 3D</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Cut The Rope.html')">
+  <img src="images/cuttherope.png">
+  <div class="game-title">Cut The Rope</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Doom 2.html')">
+  <img src="images/DOOM2.png">
+  <div class="game-title">DOOM II</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/BitLife.html')">
+  <img src="images/bitlife.png">
+  <div class="game-title">Bitlife</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Bazooka Boy.html')">
+  <img src="images/bazooka_boy.png">
+  <div class="game-title">Bazooka Boy</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Candy Crush.html')">
+  <img src="images/candy_crush.png">
+  <div class="game-title">Candy Crush</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Coooking Mama.html')">
+  <img src="images/cooking_mama.png">
+  <div class="game-title">Cooking Mama</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/osu!.html')">
+  <img src="images/osu.png">
+  <div class="game-title">Osu!</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Five Nights at Freddys_ Ultimate Custom Night.html')">
+  <img src="images/ucn.png">
+  <div class="game-title">UCN</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/ Duck Life.html')">
+  <img src="images/ducklife.png">
+  <div class="game-title">Ducklife</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Hotline Miami.html')">
+  <img src="images/hotlinemiami.png">
+  <div class="game-title">Hotline Miami</div>
+</div>
+
+      <div class="card" onclick="launchGame('games/Backrooms.html')">
+  <img src="images/backrooms.png">
+  <div class="game-title">Backrooms</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Bad Ice Cream.html')">
+  <img src="images/bic.png">
+  <div class="game-title">Bad Ice-Cream</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Soon.html')">
+  <img src="images/bic2.png">
+  <div class="game-title">Bad Ice-Cream 2</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Soon.html')">
+  <img src="images/bic3.png">
+  <div class="game-title">Bad Ice-Cream 3 (Soon)</div>
+</div>
+
+    <div class="card" onclick="launchGame('games/Soon.html')">
+  <img src="images/son.png">
+  <div class="game-title">Soon</div>
+</div>
+
+    
 
   </div>
-</div>
-
 
 
 <script src="js/main.js"></script>

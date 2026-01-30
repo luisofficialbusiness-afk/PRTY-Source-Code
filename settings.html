@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PRTY Settings</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+
+<!-- SIDEBAR (unchanged) -->
+<div class="sidebar" id="sidebar">
+  <h2>PRTY</h2>
+  <a href="index.html">Home</a>
+  <a href="games.html">Games</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="settings.html" class="active">Settings</a>
+</div>
+
+<button class="toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- MAIN -->
+<div class="main">
+  <h1 class="page-title">⚙️ Settings</h1>
+
+  <!-- SHORTCUTS -->
+  <div class="settings-card">
+    <h2>🔗 Shortcuts</h2>
+    <button onclick="setShortcut('games.html')">PRTY Games</button>
+    <button onclick="setShortcut('movies.html')">PRTY Cinema</button>
+    <button onclick="setShortcut('manga.html')">PRTY Manga</button>
+    <button onclick="clearShortcut()">Clear Shortcut</button>
+  </div>
+
+  <!-- CLOAK -->
+  <div class="settings-card">
+    <h2>🕵️ Cloak</h2>
+    <button onclick="setCloak('ClassLink', 'https://www.classlink.com/favicon.ico')">
+      ClassLink
+    </button>
+    <button onclick="setCloak('Google Classroom', 'https://classroom.google.com/favicon.ico')">
+      Google Classroom
+    </button>
+    <button onclick="resetCloak()">Reset Cloak</button>
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/prty-settings.js"></script>
+</body>
+</html>

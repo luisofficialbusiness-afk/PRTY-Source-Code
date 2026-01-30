@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather & Battery</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0b0f1a, #141a2e);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: #141a2e;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    .label {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .value {
+      font-size: 1.4rem;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>System Overview</h1>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">🔋 Battery Status</div>
+    <div class="value" id="battery">Loading…</div>
+  </div>
+
+  <div class="card">
+    <div class="label">🌦 Current Weather</div>
+    <div class="value" id="weather">Loading…</div>
+  </div>
+</div>
+
+<script>
+// BATTERY
+if (navigator.getBattery) {
+  navigator.getBattery().then(battery => {
+    const percent = Math.round(battery.level * 100);
+    document.getElementById("battery").innerText =
+      percent + "% " + (battery.charging ? "(Charging)" : "");
+  });
+} else {
+  document.getElementById("battery").innerText = "Unavailable";
+}
+
+// WEATHER (Open-Meteo)
+navigator.geolocation.getCurrentPosition(pos => {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+    .then(r => r.json())
+    .then(data => {
+      const w = data.current_weather;
+      document.getElementById("weather").innerText =
+        `${w.temperature}°C • Wind ${w.windspeed} km/h`;
+    })
+    .catch(() => {
+      document.getElementById("weather").innerText = "Weather unavailable";
+    });
+}, () => {
+  document.getElementById("weather").innerText = "Location denied";
+});
+</script>
+
+</body>
+</html>

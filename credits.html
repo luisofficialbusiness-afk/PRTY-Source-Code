@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PRTY - Credits</title>
+  <title>Dashboard</title>
+   <link rel="icon" type="image/png" href="assets/canvascloak.png">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ===== Neon animated background for credits page ===== */
+    
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
@@ -31,7 +32,7 @@
       100% { background-position: 10% 5%, 90% 95%; }
     }
 
-    /* ===== Main container ===== */
+    
     .main {
       position: relative;
       z-index: 1;
@@ -46,7 +47,7 @@
       text-align: center;
     }
 
-    /* ===== Credits grid ===== */
+
     .credits-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -90,7 +91,7 @@
       font-size: 0.9em;
     }
 
-    /* ===== Sidebar fix ===== */
+
     .sidebar {
       z-index: 2; /* above background animation */
     }
@@ -105,17 +106,18 @@
 
   <div class="background-animation"></div>
 
-  <div class="sidebar" id="sidebar">
-    <h2>PRTY</h2>
-    <a href="index.html">Home</a>
-    <a href="games.html">Games</a>
-    <a href="apps.html">Apps</a>
-    <a href="movies.html">Movies (Google Drive)</a>
-    <a href="proxy.html">Proxy</a>
-    <a href="credits.html">Credits</a>
-  </div>
-
-  <button class="toggle" onclick="toggleSidebar()">☰</button>
+ <div class="sidebar" id="sidebar">
+  <h2>PRTY</h2>
+  <a href="index.html">Home</a>
+  <a href="games.html">Games</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="proxy.html">Proxy</a>
+  <a href="credits.html">Credits</a>
+  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+</div>
 
   <div class="main">
     <h1 class="page-title">✨ Credits</h1>
@@ -124,17 +126,12 @@
       <div class="credit-card">
         <img src="images/dev.jpg" alt="Developer">
         <h3>RVEPRTY</h3>
-        <p>Developer / Designer</p>
+        <p>Creator / Developer / Designer</p>
       </div>
       <div class="credit-card">
         <img src="images/virgo.png" alt="Virgo">
         <h3>Virgo/Offensive Asian</h3>
-        <p>Helper / Link & Movie Provider</p>
-      </div>
-      <div class="credit-card">
-        <img src="images/special.png" alt="Special Thanks">
-        <h3>Special Thanks</h3>
-        <p>Beta Testers</p>
+        <p>Helper / Link & Movie Provider/ hi</p>
       </div>
       <div class="credit-card">
         <img src="images/lvl2.jpg" alt="Bug Hunter 2">
@@ -146,7 +143,7 @@
         <h3>Lvl 3 Bug Hunters</h3>
         <p>Placeholder</p>
       </div>
-      <!-- Add more cards as needed -->
+
     </div>
   </div>
 

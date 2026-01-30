@@ -16,11 +16,11 @@
   <a href="apps.html">Apps</a>
   <a href="movies.html">Movies</a>
   <a href="manga.html">Manga</a>
-  <a href="radio.html">PRTY Radio</a>
+  <a href="proxy.html">Proxy</a>
   <a href="credits.html">Credits</a>
+  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 </div>
-
-<button class="toggle" onclick="toggleSidebar()">☰</button>
 
 <div class="main radio-main">
 
@@ -29,10 +29,14 @@
 
   <!-- Station Buttons -->
   <div class="radio-stations">
-    <button onclick="loadStation(0)">🔥 Main</button>
-    <button onclick="loadStation(1)">🌙 Late Night</button>
-    <button onclick="loadStation(2)">⚡ Energy</button>
-    <button onclick="loadStation(3)">🧊 Chill</button>
+    <button onclick="selectStation(0, 'Main')">🔥 Main</button>
+    <button onclick="selectStation(1, 'Late Night')">🌙 Late Night</button>
+    <button onclick="selectStation(2, 'Energy')">⚡ Energy</button>
+    <button onclick="selectStation(3, 'Chill')">🧊 Chill</button>
+  </div>
+  <div class="radio-proxy">
+    <p>⚠️ Music not loading?</p>
+    <button onclick="openRadioProxy()">🎧 Open PRTY Radio (Unblocked)</button>
   </div>
 
   <!-- Player -->

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timer & Stopwatch</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0b0f1a, #141a2e);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .timer-card {
+      background: #141a2e;
+      padding: 30px;
+      border-radius: 16px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      margin: 0 0 15px;
+      font-size: 1.4rem;
+      opacity: 0.9;
+    }
+
+    #time {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin: 20px 0;
+      letter-spacing: 2px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #1f2540;
+      color: #fff;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #2a3170;
+    }
+
+    .danger {
+      background: #c62828;
+    }
+
+    .danger:hover {
+      background: #e53935;
+    }
+  </style>
+</head>
+<body>
+
+<div class="timer-card">
+  <h1>Stopwatch</h1>
+  <div id="time">0.0</div>
+  <div class="buttons">
+    <button onclick="start()">Start</button>
+    <button onclick="stop()">Pause</button>
+    <button class="danger" onclick="reset()">Reset</button>
+  </div>
+</div>
+
+<script>
+let elapsed = 0;
+let interval = null;
+
+function start() {
+  if (interval) return;
+  interval = setInterval(() => {
+    elapsed += 0.1;
+    document.getElementById("time").innerText = elapsed.toFixed(1);
+  }, 100);
+}
+
+function stop() {
+  clearInterval(interval);
+  interval = null;
+}
+
+function reset() {
+  stop();
+  elapsed = 0;
+  document.getElementById("time").innerText = "0.0";
+}
+</script>
+
+</body>
+</html>

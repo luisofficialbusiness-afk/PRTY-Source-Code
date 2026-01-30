@@ -1,16 +1,16 @@
-// 🔊 ADD YOUR SOUNDCLOUD PLAYLIST LINKS HERE
+// Stations
 const stations = [
-  // 🔥 Main
-  "https://soundcloud.com/YOUR_PLAYLIST_LINK",
+  //  Main
+  "https://soundcloud.com/luis-cruz-499857984/sets/prty-radio",
 
-  // 🌙 Late Night
-  "https://soundcloud.com/YOUR_PLAYLIST_LINK",
+  //  Late Night
+  "https://soundcloud.com/stormmusicgroup/sets/late-night-playlist",
 
-  // ⚡ Energy
-  "https://soundcloud.com/YOUR_PLAYLIST_LINK",
+  //  Energy
+  "https://soundcloud.com/stormmusicgroup/sets/hype-gaming-music",
 
-  // 🧊 Chill
-  "https://soundcloud.com/YOUR_PLAYLIST_LINK"
+  //  Chill
+  "https://soundcloud.com/real-basil-omori-read-desc/sets/tuff-chill-playlist-for"
 ];
 
 const frame = document.getElementById("radio-frame");
@@ -26,3 +26,42 @@ window.addEventListener("load", () => {
   const random = Math.floor(Math.random() * stations.length);
   loadStation(random);
 });
+
+function openRadioProxy() {
+  const radioURL = "https://prty-site.vercel.app/radio.html" ;
+  const encoded =
+    encodeURIComponent(radioURL)
+  window.open(
+
+    'https://prty-learning.b-cdn.net/service/${encoded}' ,
+    "_blank"
+    );
+}
+
+function speakPRTY(message) {
+  if (!("speechSynthesis" in window)) return;
+
+  const utterance = new SpeechSynthesisUtterance(message);
+
+  utterance.rate = 1;
+  utterance.pitch = 1;
+  utterance.volume = 1;
+
+  const voices = speechSynthesis.getVoices();
+  const preferred = voices.find(v =>
+    v.name.toLowerCase().includes("google")
+  );
+  if (preferred) utterance.voice = preferred;
+
+  speechSynthesis.cancel(); // stop any previous speech
+  speechSynthesis.speak(utterance);
+}
+
+function playStation(name) {
+  speakPRTY(`Thank you for tuning in to PARTY Radio ${name}`);
+}
+
+function selectStation(index, name) {
+  loadStation(index);
+  playStation(name);
+}
