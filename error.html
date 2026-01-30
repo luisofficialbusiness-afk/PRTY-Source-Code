@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PRTY Error</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    .error-box {
+      background: linear-gradient(135deg, #1b1b2f, #23234a);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .error-code {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #ff4d4d;
+      text-shadow: 0 0 15px #ff4d4d;
+      margin: 0;
+    }
+
+    .error-title {
+      margin-top: 10px;
+      font-size: 1.5rem;
+      color: #00ffff;
+    }
+
+    .error-phrase {
+      margin: 20px 0;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    .error-desc {
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+
+    .error-box button {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff00cc, #00ffff);
+      color: #000;
+      transition: 0.2s ease;
+    }
+
+    .error-box button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="error-box">
+    <div class="error-code" id="errorCode">404</div>
+    <div class="error-title" id="errorTitle">PRTY tripped.</div>
+
+    <div class="error-phrase" id="errorPhrase"></div>
+
+    <div class="error-desc" id="errorDesc">
+      Something went wrong on PRTY’s side.
+    </div>
+
+    <button onclick="location.href='index.html'">
+      Back to PRTY
+    </button>
+  </div>
+
+  <script>
+    // Get error code from URL (?code=500)
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code") || "404";
+
+    const errorMap = {
+      "404": {
+        title: "Page not found",
+        desc: "This page dipped or never existed."
+      },
+      "500": {
+        title: "Internal Error",
+        desc: "PRTY messed up. That’s on us."
+      },
+      "503": {
+        title: "Service Unavailable",
+        desc: "PRTY is taking a quick breather."
+      }
+    };
+
+    const phrases = [
+      "PRTY.exe stopped partying.",
+      "This wasn’t in the plans.",
+      "Someone unplugged something.",
+      "404 vibes only.",
+      "PRTY fumbled the bag.",
+      "We looked everywhere. Gone.",
+      "This page ghosted us.",
+      "PRTY needs a minute."
+    ];
+
+    document.getElementById("errorCode").textContent = code;
+
+    if (errorMap[code]) {
+      document.getElementById("errorTitle").textContent = errorMap[code].title;
+      document.getElementById("errorDesc").textContent = errorMap[code].desc;
+    }
+
+    document.getElementById("errorPhrase").textContent =
+      phrases[Math.floor(Math.random() * phrases.length)];
+  </script>
+
+</body>
+</html>
