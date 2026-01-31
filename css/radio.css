@@ -1,52 +1,27 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  transition: background 0.8s ease;
+padding: 15px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.25);
 }
 
-/* BACKGROUNDS */
-body.station-main {
-  background: linear-gradient(135deg, #ff00cc, #333399);
-}
-
-body.station-late {
-  background: linear-gradient(135deg, #0f2027, #203a43);
-}
-
-body.station-energy {
-  background: linear-gradient(135deg, #ff512f, #f09819);
-}
-
-body.station-chill {
-  background: linear-gradient(135deg, #232526, #414345);
-}
-
-/* NOW PLAYING */
-#now-playing {
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  text-align: right;
-  font-size: 0.9em;
-  opacity: 0.9;
-}
-
-#radio-frame {
-  width: 100%;
-  height: 420px;
-  border-radius: 12px;
-}
-
-/* DESCRIPTION */
-#station-desc {
-  margin-top: 12px;
-  opacity: 0.85;
-}
-
-/* PRTY SAYS */
-#prty-says {
+.radio-proxy {
   margin-top: 25px;
-  font-style: italic;
-  opacity: 0.7;
+}
+
+.radio-proxy p {
+  margin-bottom: 10px;
+}
+
+.radio-proxy button {
+  backround: linear-gradient(135deg, #ff00cc, #00ffff);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0,255,255,0.4);
+  transition: transform 0.2s ease;
+}
+
+.radio-proxy button:hover {
+  transform: scale(1.05);
 }
