@@ -30,13 +30,15 @@ function loadStation(index) {
     `&show_user=false&show_reposts=false&visual=true`;
 }
 
-// Init voices
+// Initialize voices (English ONLY)
 function initVoices() {
   const voices = speechSynthesis.getVoices();
-  if (voices.length > 0) voiceReady = true;
+
+  // Only allow English voices
+  voiceReady = voices.some(v => v.lang.startsWith("en"));
 }
 
-// Core voice function
+// Core voice function (NO foreign voices)
 function speakPRTY(message) {
   if (!("speechSynthesis" in window)) return;
   if (!voiceReady) return;
@@ -45,16 +47,23 @@ function speakPRTY(message) {
   speechSynthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(message);
-  utterance.rate = 1;
-  utterance.pitch = 1;
+
+  // Calmer, more human
+  utterance.rate = 0.95;
+  utterance.pitch = 0.9;
   utterance.volume = 1;
 
   const voices = speechSynthesis.getVoices();
-  const preferred =
-    voices.find(v => v.name.toLowerCase().includes("google")) ||
-    voices.find(v => v.lang === "en-US");
 
-  if (preferred) utterance.voice = preferred;
+  // HARD FILTER — English only
+  const preferred =
+    voices.find(v => v.lang === "en-US" && v.name.toLowerCase().includes("google")) ||
+    voices.find(v => v.lang === "en-US") ||
+    voices.find(v => v.lang.startsWith("en"));
+
+  if (!preferred) return; // Do NOT speak if no English voice
+
+  utterance.voice = preferred;
 
   lastSpoken = message;
   speechSynthesis.speak(utterance);
@@ -66,7 +75,7 @@ function prtySays() {
 
   const now = Date.now();
 
-  // Cooldown: once every 3–6 minutes
+  // Cooldown: 3–6 minutes
   if (now - lastPRTYSayTime < 180000 + Math.random() * 180000) return;
   lastPRTYSayTime = now;
 
@@ -75,18 +84,18 @@ function prtySays() {
 
   let lines = [];
 
-  // Time of day
+  // Time-based lines
   if (hour >= 22 || hour < 5) {
     lines.push(
-      "Late night vibes detected.",
-      "You should probably be asleep… but this goes hard.",
-      "PRTY Radio after hours hits different."
+      "Late night PRTY Radio hits different.",
+      "After hours vibes detected.",
+      "You’re deep into the night session."
     );
   } else if (hour < 12) {
     lines.push(
-      "Good morning. PRTY Radio is now online.",
+      "Good morning. PRTY Radio is live.",
       "Starting the day with good music.",
-      "Morning energy activated."
+      "Morning energy online."
     );
   } else {
     lines.push(
@@ -96,11 +105,11 @@ function prtySays() {
     );
   }
 
-  // Session-based
+  // Session-based lines
   if (minutesOnSite >= 15) {
     lines.push(
       "You’ve been here a while. Respect.",
-      "PRTY Radio thanks you for staying.",
+      "PRTY Radio appreciates you.",
       "At this point, you’re part of the station."
     );
   }
@@ -109,10 +118,11 @@ function prtySays() {
   speakPRTY(line);
 }
 
-// User interaction handler
+// User interaction handler (unlocks voice)
 function selectStation(index, name) {
-  initVoices(); // unlock voices
-  prtySaysEnabled = true; // allow PRTY Says
+  initVoices();
+  prtySaysEnabled = true;
+
   loadStation(index);
   speakPRTY(`Thank you for tuning in to PRTY Radio ${name}`);
 
@@ -120,13 +130,13 @@ function selectStation(index, name) {
   setTimeout(prtySays, 20000 + Math.random() * 20000);
 }
 
-// Random station on load (silent)
+// Random station on load (NO voice)
 window.addEventListener("load", () => {
   const random = Math.floor(Math.random() * stations.length);
   loadStation(random);
 });
 
-// Optional proxy open
+// Proxy open
 function openRadioProxy() {
   const radioURL = "https://prty-site.vercel.app/radio.html";
   const encoded = encodeURIComponent(radioURL);
