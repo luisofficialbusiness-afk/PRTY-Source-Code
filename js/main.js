@@ -1,160 +1,128 @@
 /* ====== SIDEBAR TOGGLE ====== */
-function toggleSidebar(){
-  const sb = document.getElementById("sidebar");
-  if(sb.style.left === "-250px"){
-    sb.style.left = "0";
-  } else {
-    sb.style.left = "-250px";
-  }
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  if (!sidebar) return;
+  sidebar.classList.toggle("closed");
 }
 
 /* ====== LIVE CLOCK & DATE ====== */
-function updateClock(){
+function updateClock() {
+  const timeEl = document.getElementById("time");
+  const dateEl = document.getElementById("date");
+  if (!timeEl || !dateEl) return;
+
   const now = new Date();
-  if(document.getElementById("time")){
-    document.getElementById("time").innerText = now.toLocaleTimeString();
-    document.getElementById("date").innerText = now.toDateString();
-  }
+  timeEl.innerText = now.toLocaleTimeString();
+  dateEl.innerText = now.toDateString();
 }
-setInterval(updateClock,1000);
+setInterval(updateClock, 1000);
 updateClock();
 
-/* ====== FIXED GAME LAUNCHER ★ ====== */
-function launchGame(url){
-  const win = window.open(url, "_blank"); // open in new tab
-  if(!win){
-    // fallback if popup blocked
-    window.location.href = url;
-  }
+/* ====== GAME / APP LAUNCH ====== */
+function launchGame(url) {
+  const win = window.open(url, "_blank");
+  if (!win) window.location.href = url;
 }
 
-// Use chosen default launch mode
 function launchPRTY(url) {
-    const mode = localStorage.getItem("launchMode") || "about:blank";
-    window.open(url, mode);
+  const mode = localStorage.getItem("launchMode") || "_blank";
+  window.open(url, mode);
 }
 
 /* ===== PRTY ACTIVITY BAR v2 (INDEX ONLY) ===== */
-
 (function () {
-  // Run ONLY on index.html
-  if (!window.location.pathname.endsWith("index.html") &&
-      !window.location.pathname.endsWith("/")) return;
+  if (
+    !window.location.pathname.endsWith("index.html") &&
+    !window.location.pathname.endsWith("/")
+  ) return;
 
   const activityText = document.getElementById("prty-activity-text");
   if (!activityText) return;
 
-  /* 🔧 MANUAL COUNTS (EDIT THESE) */
   const PRTY_STATS = {
-    games: 83,
+    games: 86,
     movies: 5,
     manga: 5
   };
 
   const hour = new Date().getHours();
 
-  const morningMessages = [
-    "☀️ good morning, PRTY is awake",
-    "☀️ early grind?",
-    "☀️ starting the day with PRTY"
-  ];
-
-  const nightMessages = [
-    "🌙 late night PRTY session",
-    "🌙 go to sleep (or don’t)",
-    "🌙 night mode energy"
-  ];
-
-  const generalMessages = [
+  const messages = [
     "🟢 PRTY is online",
-    "🚀 PRTY is running smooth",
     "🎉 welcome to PRTY",
-    "if you're reading this, hi"
-  ];
-
-  const statMessages = [
     `🎮 ${PRTY_STATS.games} games available`,
     `🎬 ${PRTY_STATS.movies} movies ready`,
-    `📚 ${PRTY_STATS.manga} manga & books`
+    `📚 ${PRTY_STATS.manga} manga & books`,
+    ...(hour >= 6 && hour < 12
+      ? ["☀️ good morning from PRTY"]
+      : []),
+    ...(hour >= 21 || hour < 5
+      ? ["🌙 late night PRTY session"]
+      : [])
   ];
 
-  function getActivityMessage() {
-    let pool = [...generalMessages, ...statMessages];
-
-    if (hour >= 6 && hour < 12) pool.push(...morningMessages);
-    if (hour >= 21 || hour < 5) pool.push(...nightMessages);
-
-    return pool[Math.floor(Math.random() * pool.length)];
-  }
-
-  function updateActivityBar() {
+  function updateActivity() {
     activityText.style.opacity = "0";
-
     setTimeout(() => {
-      activityText.textContent = getActivityMessage();
+      activityText.innerText =
+        messages[Math.floor(Math.random() * messages.length)];
       activityText.style.opacity = "1";
     }, 200);
   }
 
-  // Initial load
-  updateActivityBar();
-
-  // Rotate every 12 seconds
-  setInterval(updateActivityBar, 12000);
+  updateActivity();
+  setInterval(updateActivity, 12000);
 })();
 
+/* ===== MOVIES PAGE LOADING ===== */
+(function () {
+  const movieLoader = document.getElementById("movie-loading");
+  const movieText = document.getElementById("movie-loading-text");
+  if (!movieLoader || !movieText) return;
 
-// Panic Mode Shortcut: CTRL + L
-document.addEventListener('keydown', function(e) {
-  // Check if CTRL + L is pressed
-  if (e.ctrlKey && e.key.toLowerCase() === 'l') {
-    window.location.href = 'https://www.classlink.com';
-  }
-});
-
-// ===== Movies Page Loading Screen =====
-if (document.getElementById("movie-loading")) {
-  const moviePhrases = [
+  const phrases = [
     "Lights off. Movie on.",
-    "Loading questionable content…",
     "AfterPRTY Cinema booting",
+    "Loading questionable content…",
     "Background noise loading",
     "This seemed like a good idea"
   ];
 
-  document.getElementById("movie-loading-text").innerText =
-    moviePhrases[Math.floor(Math.random() * moviePhrases.length)];
+  movieText.innerText =
+    phrases[Math.floor(Math.random() * phrases.length)];
 
   window.addEventListener("load", () => {
     setTimeout(() => {
-      document.getElementById("movie-loading").style.display = "none";
+      movieLoader.style.display = "none";
     }, 900);
   });
-}
+})();
 
-// Loading Screen Word Bank
-const loadingPhrases = [
-  "is this kinda like Frogiee's Arcade?",
-  "Mr Beast, Give some money",
-  "HELP, IDK WHAT TO PUT HERE",
-  "GG, chat",
-  "Lightspeed is ass"
-];
+/* ===== GLOBAL LOADING SCREEN ===== */
+(function () {
+  const loader = document.getElementById("loading-screen");
+  const text = document.getElementById("loading-text");
+  if (!loader || !text) return;
 
-// Pick a random phrase
-document.getElementById('loading-text').innerText =
-  loadingPhrases[Math.floor(Math.random() * loadingPhrases.length)];
+  const phrases = [
+    "is this kinda like Frogiee's Arcade?",
+    "Mr Beast, Give some money",
+    "HELP, IDK WHAT TO PUT HERE",
+    "GG, chat",
+    "Lightspeed is ass"
+  ];
 
-// Remove loading screen after page load
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loading-screen');
-  loader.style.transition = 'opacity 0.5s ease';
-  loader.style.opacity = 0;
-  setTimeout(() => loader.style.display = 'none', 500);
-});
+  text.innerText = phrases[Math.floor(Math.random() * phrases.length)];
 
-/* APPLY SAVED SETTINGS */
-window.onload = () => {
+  window.addEventListener("load", () => {
+    loader.style.transition = "opacity 0.5s ease";
+    loader.style.opacity = 0;
+    setTimeout(() => loader.style.display = "none", 500);
+  });
+})();
+
+/* ===== APPLY SAVED SETTINGS ===== */
+window.addEventListener("load", () => {
   const theme = localStorage.getItem("prty-theme");
   const title = localStorage.getItem("cloakTitle");
   const icon = localStorage.getItem("cloakIcon");
@@ -163,7 +131,7 @@ window.onload = () => {
   if (title) document.title = title;
 
   if (icon) {
-    let link = document.querySelector("link[rel~='icon']");
+    let link = document.querySelector("link[rel='icon']");
     if (!link) {
       link = document.createElement("link");
       link.rel = "icon";
@@ -171,13 +139,13 @@ window.onload = () => {
     }
     link.href = icon;
   }
-};
+});
 
-/* PANIC SHORTCUT WITH FAKE LOADING */
-let panicTimer = null;
+/* ===== PANIC MODE (CTRL + L) ===== */
+let panicTimer;
 let panicSeconds = 3;
 
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.key.toLowerCase() === "l") {
     e.preventDefault();
     startPanic();
@@ -186,7 +154,10 @@ document.addEventListener("keydown", function (e) {
 
 function startPanic() {
   const overlay = document.getElementById("panic-overlay");
-  if (!overlay) return;
+  if (!overlay) {
+    window.location.replace("https://www.classlink.com");
+    return;
+  }
 
   panicSeconds = 3;
   overlay.style.display = "flex";
@@ -209,28 +180,24 @@ function updateCountdown() {
 
 function cancelPanic() {
   clearInterval(panicTimer);
-  document.getElementById("panic-overlay").style.display = "none";
+  const overlay = document.getElementById("panic-overlay");
+  if (overlay) overlay.style.display = "none";
 }
 
 function redirectPanic() {
-  const panicURL =
+  const url =
     localStorage.getItem("panicURL") ||
     "https://www.classlink.com";
-
-  window.location.replace(panicURL);
+  window.location.replace(url);
 }
 
+/* ===== PROXY LAUNCH ===== */
 function launchProxy() {
   const win = window.open("about:blank");
-  win.location.href = "https://prty-learning.b-cdn.net/";
+  if (win) win.location.href = "https://prty-learning.b-cdn.net/";
 }
 
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("closed");
-}
-
-// === PRTY PREMIUM KEYS ===
-// You can change / rotate these anytime
+/* ===== PRTY PREMIUM ===== */
 const PREMIUM_KEYS = [
   "PRTY-BOOST-001",
   "PRTY-LIFE-777",
@@ -238,20 +205,20 @@ const PREMIUM_KEYS = [
 ];
 
 function activatePremium() {
-  const input = document.getElementById("premium-code").value.trim();
+  const input = document.getElementById("premium-code");
   const status = document.getElementById("premium-status");
+  if (!input || !status) return;
 
-  if (PREMIUM_KEYS.includes(input)) {
+  if (PREMIUM_KEYS.includes(input.value.trim())) {
     localStorage.setItem("prty-premium", "true");
     status.style.color = "#00ffcc";
-    status.textContent = "✅ PRTY Premium Activated!";
+    status.innerText = "✅ PRTY Premium Activated!";
   } else {
     status.style.color = "#ff5555";
-    status.textContent = "❌ Invalid Premium Code";
+    status.innerText = "❌ Invalid Premium Code";
   }
 }
 
-// Utility
 function isPremiumUser() {
   return localStorage.getItem("prty-premium") === "true";
 }
