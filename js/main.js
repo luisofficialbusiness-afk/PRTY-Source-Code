@@ -40,8 +40,8 @@ function launchPRTY(url) {
   if (!activityText) return;
 
   const PRTY_STATS = {
-    games: 86,
-    movies: 5,
+    games: 80,
+    movies: 12,
     manga: 5
   };
 
