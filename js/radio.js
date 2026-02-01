@@ -70,7 +70,7 @@ function speakPRTY(message) {
 function selectStation(index, name) {
   initVoices(); // unlock speech
   loadStation(index);
-  speakPRTY("Thank you for tuning in to PRTY Radio " + name);
+  speakPRTY("Thank you for tuning in to PARTY Radio " + name);
 }
 
 // Random station on page load (NO voice)
@@ -81,13 +81,13 @@ window.addEventListener("load", () => {
 
 
 const prtyLinesDay = [
-  "PRTY Radio keeping you company.",
+  "PARTY Radio keeping you company.",
   "Hope your day is going smooth.",
   "Music makes everything better."
 ];
 
 const prtyLinesNight = [
-  "Late night vibes on PRTY Radio.",
+  "Late night vibes on PARTY Radio.",
   "You’re still up… respect.",
   "Perfect time to just chill."
 ];
