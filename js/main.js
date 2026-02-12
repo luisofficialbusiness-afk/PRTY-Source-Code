@@ -40,9 +40,9 @@ function launchPRTY(url) {
   if (!activityText) return;
 
   const PRTY_STATS = {
-    games: 80,
-    movies: 12,
-    manga: 5
+    games: 108,
+    movies: 13,
+    manga: 8
   };
 
   const hour = new Date().getHours();
