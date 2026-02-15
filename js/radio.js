@@ -1,4 +1,4 @@
-// Stations
+// Stations (uh, the stations names should be in the side btw) 
 const stations = [
   "https://soundcloud.com/luis-cruz-499857984/sets/prty-radio", // Main
   "https://soundcloud.com/stormmusicgroup/sets/late-night-playlist", // Late Night
@@ -6,7 +6,7 @@ const stations = [
   "https://soundcloud.com/real-basil-omori-read-desc/sets/tuff-chill-playlist-for" // Chill
 ];
 
-// Station metadata (NEW)
+
 const stationMeta = [
   { name: "Main", bg: "#0b0f1a" },
   { name: "Late Night", bg: "#070013" },
@@ -32,7 +32,7 @@ function loadStation(index) {
     url +
     "&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=true";
 
-  // Background swap (NEW)
+
   document.body.style.background = stationMeta[index].bg;
 }
 
@@ -54,7 +54,7 @@ function speakPRTY(message) {
   utterance.pitch = 1;
   utterance.volume = 1;
 
-  // Force ENGLISH, no French
+  
   const voices = speechSynthesis.getVoices();
   const preferred = voices.find(
     v => v.lang === "en-US" && !v.name.toLowerCase().includes("fr")
@@ -68,12 +68,12 @@ function speakPRTY(message) {
 
 
 function selectStation(index, name) {
-  initVoices(); // unlock speech
+  initVoices(); 
   loadStation(index);
   speakPRTY("Thank you for tuning in to PARTY Radio " + name);
 }
 
-// Random station on page load (NO voice)
+
 window.addEventListener("load", () => {
   const random = Math.floor(Math.random() * stations.length);
   loadStation(random);
@@ -106,7 +106,7 @@ function prtySays() {
   speakPRTY(line);
 }
 
-// Speak every 6–9 minutes (randomized)
+
 setInterval(() => {
   if (Math.random() < 0.6) prtySays();
 }, 420000);
