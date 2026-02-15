@@ -1,4 +1,4 @@
-// SHORTCUTS
+
 function setShortcut(page) {
   localStorage.setItem("prty-shortcut", page);
   alert("Shortcut saved!");
@@ -9,7 +9,7 @@ function clearShortcut() {
   alert("Shortcut cleared!");
 }
 
-// CLOAK
+
 function setCloak(title, icon) {
   localStorage.setItem("prty-cloak-title", title);
   localStorage.setItem("prty-cloak-icon", icon);
