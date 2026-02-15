@@ -144,46 +144,6 @@
         location.href = "/";
       }
     };
-
-    // ===== WEBHOOK PLACEHOLDER =====
-const WEBHOOK_URL = "";
-
-// Errors that should auto-send
-const CRITICAL_ERRORS = ["500", "502", "503", "451"];
-
-// Build webhook message
-function sendStatus(auto = false) {
-  const payload = {
-    content: `🚨 **PRTY STATUS ALERT**
-Error Code: **${code}**
-Page: \`${location.pathname}\`
-Auto: ${auto ? "Yes" : "Manual"}
-Time: ${new Date().toUTCString()}`
-  };
-
-  fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  }).catch(() => {});
-}
-
-// ===== AUTO SEND (ONCE PER SESSION) =====
-if (CRITICAL_ERRORS.includes(code)) {
-  if (!sessionStorage.getItem("prty-webhook-sent")) {
-    sendStatus(true);
-    sessionStorage.setItem("prty-webhook-sent", "true");
-  }
-
-  // Show manual button too
-  document.getElementById("statusBtn").style.display = "inline-block";
-}
-
-// ===== MANUAL BUTTON =====
-document.getElementById("statusBtn").onclick = () => {
-  sendStatus(false);
-  alert("PRTY status update sent.");
-};
   </script>
 
 </body>
