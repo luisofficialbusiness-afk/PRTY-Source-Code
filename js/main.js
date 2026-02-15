@@ -1,11 +1,11 @@
-/* ====== SIDEBAR TOGGLE ====== */
+
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   if (!sidebar) return;
   sidebar.classList.toggle("closed");
 }
 
-/* ====== LIVE CLOCK & DATE ====== */
+
 function updateClock() {
   const timeEl = document.getElementById("time");
   const dateEl = document.getElementById("date");
@@ -18,7 +18,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-/* ====== GAME / APP LAUNCH ====== */
+
 function launchGame(url) {
   const win = window.open(url, "_blank");
   if (!win) window.location.href = url;
@@ -29,7 +29,7 @@ function launchPRTY(url) {
   window.open(url, mode);
 }
 
-/* ===== PRTY ACTIVITY BAR v2 (INDEX ONLY) ===== */
+
 (function () {
   if (
     !window.location.pathname.endsWith("index.html") &&
@@ -74,7 +74,7 @@ function launchPRTY(url) {
   setInterval(updateActivity, 12000);
 })();
 
-/* ===== MOVIES PAGE LOADING ===== */
+
 (function () {
   const movieLoader = document.getElementById("movie-loading");
   const movieText = document.getElementById("movie-loading-text");
@@ -98,7 +98,7 @@ function launchPRTY(url) {
   });
 })();
 
-/* ===== APPLY SAVED SETTINGS ===== */
+
 window.addEventListener("load", () => {
   const theme = localStorage.getItem("prty-theme");
   const title = localStorage.getItem("cloakTitle");
@@ -118,7 +118,7 @@ window.addEventListener("load", () => {
   }
 });
 
-/* ===== PANIC MODE (CTRL + L) ===== */
+
 let panicTimer;
 let panicSeconds = 3;
 
@@ -168,13 +168,13 @@ function redirectPanic() {
   window.location.replace(url);
 }
 
-/* ===== PROXY LAUNCH ===== */
+
 function launchProxy() {
   const win = window.open("about:blank");
   if (win) win.location.href = "https://prty-learning.b-cdn.net/";
 }
 
-/* ===== PRTY PREMIUM ===== */
+
 const PREMIUM_KEYS = [
   "PRTY-BOOST-001",
   "PRTY-LIFE-777",
