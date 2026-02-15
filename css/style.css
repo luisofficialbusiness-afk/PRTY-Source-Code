@@ -1,4 +1,4 @@
-/* ===== BODY & GENERAL ===== */
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -6,7 +6,7 @@ body {
   color: #fff;
 }
 
-/* ===== SIDEBAR ===== */
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -42,7 +42,7 @@ body {
   text-shadow: 0 0 10px #00ffff;
 }
 
-/* ===== TOGGLE BUTTON ===== */
+
 .toggle {
   position: fixed;
   top: 20px;
@@ -58,17 +58,17 @@ body {
   z-index: 1100;
 }
 
-/* ===== SIDEBAR SLIDE UPGRADE ===== */
+
 .sidebar {
   transition: transform 0.3s ease;
 }
 
-/* CLOSED STATE */
+
 .sidebar.closed {
   transform: translateX(-220px);
 }
 
-/* ===== SIDEBAR TOGGLE BUTTON ===== */
+
 .sidebar-toggle {
   position: absolute;
   top: 20px;
@@ -89,7 +89,7 @@ body {
   transform: scale(1.05);
 }
 
-/* ===== MAIN CONTENT SHIFT ===== */
+
 .main {
   margin-left: 220px;
   transition: margin-left 0.3s ease;
@@ -100,20 +100,20 @@ body {
 }
 
 
-/* ===== MAIN CONTENT ===== */
+
 .main {
   margin-left: 240px;
   padding: 20px;
 }
 
-/* Page Title */
+
 .page-title {
   font-size: 2.5em;
   color: #00ffff;
   text-shadow: 0 0 15px #ff00cc;
 }
 
-/* ===== CLOCK & DATE BOX ===== */
+
 .clock-box {
   background: linear-gradient(145deg, #23234a, #1b1b2f);
   padding: 15px 25px;
@@ -126,7 +126,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* ===== UPDATES SECTION ===== */
+
 .updates {
   background: linear-gradient(145deg, #23234a, #1b1b2f);
   padding: 15px 25px;
@@ -147,7 +147,7 @@ body {
   margin-top: 10px;
 }
 
-/* ===== GRID FOR GAMES/APPS ===== */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -155,7 +155,7 @@ body {
   padding: 20px 0;
 }
 
-/* ===== CARDS ===== */
+
 .card, .game-card {
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@ body {
   box-shadow: 0 0 25px rgba(0,255,255,0.8);
 }
 
-/* Image inside card */
+
 .card img, .game-card img {
   width: 100%;
   height: 160px;
@@ -181,7 +181,7 @@ body {
   border-bottom: 2px solid rgba(255,255,255,0.2);
 }
 
-/* Game/App Title */
+
 .game-title, .game-card p {
   display: block;
   text-align: center;
@@ -192,7 +192,7 @@ body {
   width: 100%;
 }
 
-/* ===== FILTER BAR (optional) ===== */
+
 .filter-bar {
   margin: 20px 0;
   display: flex;
@@ -215,7 +215,7 @@ body {
   box-shadow: 0 0 15px rgba(0,255,255,0.7);
 }
 
-/* ===== UNDER CONSTRUCTION PAGE ===== */
+
 .under-construction {
   height: 80vh;
   display: flex;
@@ -268,7 +268,7 @@ body {
   display: inline-block;
   margin: 15px;
   padding: 10px 16px;
-  background: linear-gradient(90deg, #ff79c6, #8be9fd); /* Party theme gradient */
+  background: linear-gradient(90deg, #ff79c6, #8be9fd); 
   color: white;
   font-weight: bold;
   border-radius: 12px;
@@ -308,7 +308,7 @@ body {
   }
 }
 
-/* ===== Movies Page Loading Screen ===== */
+
 #movie-loading {
   position: fixed;
   inset: 0;
@@ -339,7 +339,7 @@ body {
   100% { opacity: 0.4; }
 }
 
-/* ===== Movie Card Micro-Interactions ===== */
+
 .movie-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -365,7 +365,7 @@ body {
   margin-top: 4px;
 }
 
-/* Loading Screen Styles */
+
 #loading-screen {
   position: fixed;
   top: 0;
@@ -388,14 +388,12 @@ body {
   animation: blink 1s infinite;
 }
 
-/* Simple blink effect */
+
 @keyframes blink {
   0%, 50%, 100% { opacity: 1; }
   25%, 75% { opacity: 0.3; }
 
-  /* ===============================
-   PRTY SETTINGS + PANIC POLISH
-   =============================== */
+
 
 .settings-page {
   min-height: 100vh;
@@ -423,7 +421,7 @@ body {
   color: #aaa;
 }
 
-/* SETTINGS CARDS */
+
 .settings-card {
   background: rgba(255,255,255,0.06);
   border-radius: 20px;
@@ -448,7 +446,7 @@ body {
   color: #ddd;
 }
 
-/* INPUTS & SELECTS */
+
 .settings-card input,
 .settings-card select {
   width: 100%;
@@ -467,7 +465,7 @@ body {
   color: #aaa;
 }
 
-/* BUTTONS */
+
 .settings-card button {
   padding: 12px 18px;
   border-radius: 14px;
@@ -495,7 +493,7 @@ body {
   background: linear-gradient(135deg,#ff5f5f,#ff9f43);
 }
 
-/* THEMES */
+
 body.dark { background: radial-gradient(circle at top, #1b1035, #09090f 65%); }
 body.light { background: #f4f4f4; color: #111; }
 body.red { background: radial-gradient(circle at top, #3a0000, #120000); }
@@ -513,9 +511,7 @@ body.prty {
   100% { filter: hue-rotate(360deg); }
 }
 
-/* =========================
-   PANIC MODE OVERLAY
-   ========================= */
+
 
 #panic-overlay {
   position: fixed;
@@ -570,20 +566,18 @@ body.prty {
   100% { transform: translateX(0); }
 }
 
-/* =========================
-   ABSOLUTE PROXY MODE
-   ========================= */
+
 
 body.proxy-page {
   margin: 0;
   overflow: hidden;
 }
 
-/* FORCE IFRAME TO FILL SCREEN */
+
 #proxy-iframe {
   position: fixed;
   top: 0;
-  left: 220px; /* SIDEBAR WIDTH — adjust if needed */
+  left: 220px; 
   right: 0;
   bottom: 0;
   width: auto;
