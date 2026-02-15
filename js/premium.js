@@ -1,5 +1,4 @@
-// === PRTY PREMIUM KEYS ===
-// You can change / rotate these anytime
+
 const PREMIUM_KEYS = [
   "PRTY-BOOST-001",
   "PRTY-LIFE-777",
