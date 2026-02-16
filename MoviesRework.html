@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRTY - Movies & TV Shows</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRTY - Movies & TV Shows</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1625;
+            --bg-secondary: #24203a;
+            --bg-card: #2d2640;
+            --bg-sidebar: #151320;
+            --text-primary: #ffffff;
+            --text-secondary: #00d9ff;
+            --text-muted: #8b7ea8;
+            --accent: #00d9ff;
+            --accent-hover: #00b8e6;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--bg-sidebar);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            padding: 0 2rem;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 0.85rem 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            padding: 2rem 3rem;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .search-bar {
+            width: 400px;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        select {
+            padding: 0.65rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        select:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-card);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .card-poster {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(26, 22, 37, 0.95) 0%, transparent 100%);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .player-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .player-modal.active {
+            display: block;
+        }
+
+        .player-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-hover);
+            transform: translateX(-5px);
+        }
+
+        .player-wrapper {
+            width: 100%;
+            height: 70vh;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .player-info {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .player-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .player-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .player-desc {
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                padding: 1rem 0;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+                padding: 0 1rem;
+            }
+
+            .nav-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                margin-left: 60px;
+                padding: 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
+            .search-bar {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">PRTY</div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-view="movies">Movies</li>
+                <li class="nav-item" data-view="tv">TV Shows</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <div class="page-title">
+                    <span class="icon">🎬</span>
+                    <span id="page-title-text">Movies</span>
+                </div>
+                <input type="text" class="search-bar" id="search-input" placeholder="Search movies and shows...">
+            </div>
+
+            <div class="filters">
+                <select id="sort-select">
+                    <option value="popularity.desc">Popular</option>
+                    <option value="vote_average.desc">Top Rated</option>
+                    <option value="primary_release_date.desc">Latest</option>
+                    <option value="primary_release_date.asc">Oldest</option>
+                    <option value="original_title.asc">A-Z</option>
+                    <option value="original_title.desc">Z-A</option>
+                </select>
+                <select id="genre-select">
+                    <option value="">All Genres</option>
+                </select>
+            </div>
+
+            <div class="grid" id="content-grid">
+                <div class="loading">Loading amazing content...</div>
+            </div>
+        </main>
+    </div>
+
+    <div class="player-modal" id="player-modal">
+        <div class="player-container">
+            <div class="player-header">
+                <button class="back-btn" onclick="closePlayer()">← Back to Library</button>
+            </div>
+            
+            <div class="player-wrapper">
+                <iframe id="main-player" allowfullscreen></iframe>
+            </div>
+
+            <div class="player-info">
+                <h1 class="player-title" id="watch-title"></h1>
+                <div class="player-meta">
+                    <span id="watch-year"></span>
+                    <span id="watch-rating"></span>
+                    <span id="watch-runtime"></span>
+                </div>
+                <p class="player-desc" id="watch-desc"></p>
+                
+                <div class="player-controls">
+                    <div class="control-group">
+                        <span class="control-label">Server:</span>
+                        <select id="server-select"></select>
+                    </div>
+                    <div class="control-group" id="season-control" style="display: none;">
+                        <span class="control-label">Season:</span>
+                        <select id="season-select"></select>
+                    </div>
+                    <div class="control-group" id="episode-control" style="display: none;">
+                        <span class="control-label">Episode:</span>
+                        <select id="episode-select"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = "ec91712830914dffe2c5562fe5c127e0";
+        
+        const SERVERS = [
+            "https://player.videasy.net/movie/",
+            "https://multiembed.mov/?tmdb=1&video_id=",
+            "https://vidlink.pro/",
+            "https://vidsrc.rip/embed/movie/",
+            "https://moviesapi.to/movie/",
+            "https://moviesapi.club/movie/",
+            "https://player.smashy.stream/movie/",
+            "https://iframe.pstream.mov/media/tmdb-movie-",
+            "https://vidsrc.xyz/embed/movie?tmdb=",
+            "https://vidsrc.icu/embed/movie/"
+        ];
+
+        const MOVIE_GENRES = {
+            28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",
+            99: "Documentary", 18: "Drama", 10751: "Family", 14: "Fantasy", 36: "History",
+            27: "Horror", 10402: "Music", 9648: "Mystery", 10749: "Romance", 878: "Sci-Fi",
+            53: "Thriller", 10752: "War", 37: "Western"
+        };
+
+        const TV_GENRES = {
+            10759: "Action & Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",
+            99: "Documentary", 18: "Drama", 10762: "Kids", 9648: "Mystery",
+            10765: "Sci-Fi & Fantasy", 10768: "War & Politics", 37: "Western"
+        };
+
+        let currentType = "movie";
+        let currentSort = "popularity.desc";
+        let currentGenre = "";
+        let currentQuery = "";
+        let currentPage = 1;
+        let selectedItem = null;
+        let currentSeason = 1;
+        let currentEpisode = 1;
+        let currentServerIndex = 8;
+
+        function init() {
+            setupServerDropdown();
+            setupGenreDropdown();
+            setupEventListeners();
+            fetchMedia();
+        }
+
+        function setupServerDropdown() {
+            const dropdown = document.getElementById('server-select');
+            SERVERS.forEach((s, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `Server ${i + 1}`;
+                if (i === currentServerIndex) opt.selected = true;
+                dropdown.appendChild(opt);
+            });
+        }
+
+        function setupGenreDropdown() {
+            const dropdown = document.getElementById('genre-select');
+            dropdown.innerHTML = '<option value="">All Genres</option>';
+            const genres = currentType === 'tv' ? TV_GENRES : MOVIE_GENRES;
+            Object.entries(genres).forEach(([id, name]) => {
+                const opt = document.createElement('option');
+                opt.value = id;
+                opt.textContent = name;
+                dropdown.appendChild(opt);
+            });
+        }
+
+        async function fetchMedia() {
+            let url;
+            if (currentQuery) {
+                url = `https://api.themoviedb.org/3/search/${currentType}?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}&page=${currentPage}`;
+            } else {
+                let params = `sort_by=${currentSort}&vote_count.gte=50&page=${currentPage}`;
+                if (currentGenre) params += `&with_genres=${currentGenre}`;
+                url = `https://api.themoviedb.org/3/discover/${currentType}?api_key=${API_KEY}&${params}`;
+            }
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                renderGrid(data.results || []);
+            } catch (err) {
+                console.error("Failed to load content");
+            }
+        }
+
+        function renderGrid(items) {
+            const grid = document.getElementById('content-grid');
+            grid.innerHTML = "";
+
+            if (!items || items.length === 0) {
+                grid.innerHTML = '<div class="loading">No results found</div>';
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const poster = item.poster_path 
+                    ? `https://image.tmdb.org/t/p/w500${item.poster_path}` 
+                    : `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='750'%3E%3Crect fill='%232d2640' width='500' height='750'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%238b7ea8' font-size='24'%3ENo Poster%3C/text%3E%3C/svg%3E`;
+                
+                const year = (item.release_date || item.first_air_date || "").split("-")[0];
+                const rating = item.vote_average ? `⭐ ${item.vote_average.toFixed(1)}` : "";
+
+                card.innerHTML = `
+                    <img class="card-poster" src="${poster}" alt="${item.title || item.name}">
+                    <div class="card-overlay">
+                        <div class="card-title">${item.title || item.name}</div>
+                        <div class="card-meta">${year} ${rating}</div>
+                    </div>
+                `;
+                
+                card.onclick = () => openPlayer(item);
+                grid.appendChild(card);
+            });
+        }
+
+        async function openPlayer(item) {
+            selectedItem = item;
+            selectedItem.media_type = currentType;
+            
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/${currentType}/${item.id}?api_key=${API_KEY}&append_to_response=credits`);
+                const details = await res.json();
+
+                document.getElementById('watch-title').textContent = item.title || item.name;
+                document.getElementById('watch-year').textContent = (item.release_date || item.first_air_date || "").split("-")[0];
+                document.getElementById('watch-rating').textContent = item.vote_average ? `⭐ ${item.vote_average.toFixed(1)}/10` : "";
+                document.getElementById('watch-runtime').textContent = details.runtime ? `${details.runtime} min` : details.number_of_seasons ? `${details.number_of_seasons} Seasons` : "";
+                document.getElementById('watch-desc').textContent = details.overview || "No description available.";
+
+                if (currentType === 'tv' && details.seasons) {
+                    document.getElementById('season-control').style.display = 'flex';
+                    document.getElementById('episode-control').style.display = 'flex';
+                    populateSeasons(details.seasons);
+                } else {
+                    document.getElementById('season-control').style.display = 'none';
+                    document.getElementById('episode-control').style.display = 'none';
+                }
+
+                document.getElementById('player-modal').classList.add('active');
+                updateServer(currentServerIndex);
+            } catch (err) {
+                console.error("Failed to load details");
+            }
+        }
+
+        function populateSeasons(seasons) {
+            const select = document.getElementById('season-select');
+            select.innerHTML = '';
+            seasons.forEach(s => {
+                if (s.season_number > 0) {
+                    const opt = document.createElement('option');
+                    opt.value = s.season_number;
+                    opt.textContent = `Season ${s.season_number}`;
+                    opt.setAttribute('data-episodes', s.episode_count);
+                    select.appendChild(opt);
+                }
+            });
+            if (seasons.length > 0) {
+                const first = seasons.find(s => s.season_number === 1) || seasons[0];
+                currentSeason = first.season_number;
+                populateEpisodes(first.episode_count);
+            }
+        }
+
+        function populateEpisodes(count) {
+            const select = document.getElementById('episode-select');
+            select.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `Episode ${i}`;
+                select.appendChild(opt);
+            }
+            currentEpisode = 1;
+        }
+
+        function updateServer(index) {
+            const player = document.getElementById('main-player');
+            let url = SERVERS[index];
+            
+            if (currentType === 'tv') {
+                if (url.includes("vidsrc.xyz") || url.includes("vidsrc.icu")) {
+                    url = url.replace("/movie", "/tv") + `${selectedItem.id}&season=${currentSeason}&episode=${currentEpisode}`;
+                } else if (url.includes("vidsrc.rip")) {
+                    url = url.replace("/movie/", "/tv/") + `${selectedItem.id}/${currentSeason}/${currentEpisode}`;
+                } else if (url.includes("multiembed")) {
+                    url = url + `${selectedItem.id}&s=${currentSeason}&e=${currentEpisode}`;
+                } else {
+                    url = url.replace("/movie/", "/tv/") + selectedItem.id;
+                }
+            } else {
+                url = url + selectedItem.id;
+            }
+            
+            player.src = url;
+        }
+
+        function closePlayer() {
+            document.getElementById('player-modal').classList.remove('active');
+            document.getElementById('main-player').src = "";
+        }
+
+        function setupEventListeners() {
+            document.getElementById('search-input').oninput = (e) => {
+                currentQuery = e.target.value.trim();
+                currentPage = 1;
+                fetchMedia();
+            };
+
+            document.getElementById('sort-select').onchange = (e) => {
+                currentSort = e.target.value;
+                currentPage = 1;
+                fetchMedia();
+            };
+
+            document.getElementById('genre-select').onchange = (e) => {
+                currentGenre = e.target.value;
+                currentPage = 1;
+                fetchMedia();
+            };
+
+            document.getElementById('server-select').onchange = (e) => {
+                currentServerIndex = parseInt(e.target.value);
+                updateServer(currentServerIndex);
+            };
+
+            document.getElementById('season-select').onchange = (e) => {
+                currentSeason = e.target.value;
+                const episodes = e.target.options[e.target.selectedIndex].getAttribute('data-episodes');
+                populateEpisodes(episodes);
+                updateServer(currentServerIndex);
+            };
+
+            document.getElementById('episode-select').onchange = (e) => {
+                currentEpisode = e.target.value;
+                updateServer(currentServerIndex);
+            };
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const view = this.getAttribute('data-view');
+                    
+                    if (view === "movies") {
+                        currentType = "movie";
+                        document.getElementById('page-title-text').textContent = "Movies";
+                    } else if (view === "tv") {
+                        currentType = "tv";
+                        document.getElementById('page-title-text').textContent = "TV Shows";
+                    }
+                    
+                    setupGenreDropdown();
+                    currentPage = 1;
+                    fetchMedia();
+                });
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
