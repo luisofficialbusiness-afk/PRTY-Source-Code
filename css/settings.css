@@ -1,33 +1,64 @@
 .settings-card {
-  background: linear-gradient(135deg, #1b1b2f, #23234a);
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  /* Subtle glass effect instead of heavy solid gradients */
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: border-color 0.3s ease;
+}
+
+.settings-card:hover {
+  border-color: rgba(0, 255, 255, 0.3);
 }
 
 .settings-card h2 {
-  margin-top: 0;
-  color: #00ffff;
-  text-shadow: 0 0 10px #ff00cc;
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  /* Replaced harsh text-shadow with a clean gradient */
+  background: linear-gradient(90deg, #00ffff, #ff00cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .settings-card button {
-  display: block;
+  display: inline-flex; /* Better than 'block' for modern layouts */
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  margin-top: 12px;
+  background: #fff; /* High contrast "Light" mode button for dark UI */
+  color: #020617;
   border: none;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(135deg, #ff00cc, #00ffff);
-  color: #000;
-  transition: 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .settings-card button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px #00ffff;
+  background: #00ffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(0, 255, 255, 0.5);
+}
+
+.settings-card button:active {
+  transform: translateY(0);
+}
+
+/* Optional: For settings with inputs/toggles */
+.settings-card input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  margin-top: 8px;
 }
