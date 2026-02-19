@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #6200ee;
+  --secondary-color: #03dac6;
+  --background-color: rgba(255, 255, 255, 0.4);
+  --border-radius: 10px;
+  --transition-speed: 0.3s;
+}
+
+body {
+  background: var(--background-color);
+  backdrop-filter: blur(10px);
+  transition: background var(--transition-speed);
+}
+
+.radio {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--primary-color);
+  transition: border-color var(--transition-speed);
+}
+
+.radio:hover {
+  border-color: var(--secondary-color);
+}
+
+@media (max-width: 600px) {
+  .radio {
+    width: 100%;
+    padding: 15px;
+  }
+}
