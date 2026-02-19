@@ -1,102 +1,116 @@
 :root {
-  --clr-pri: hsl(315, 100%, 55%);
-  --clr-sec: hsl(185, 100%, 50%);
-  --clr-bg: #020617;
-  --clr-surface: rgba(30, 41, 59, 0.4);
-  --clr-border: rgba(255, 255, 255, 0.06);
-  --radius-modern: 12px;
-  --font-main: 'Inter', system-ui, sans-serif;
+  --sb-width: 240px;
+  --clr-accent: #00ffff;
+  --clr-bg: #05070f;
+  --clr-card: rgba(255, 255, 255, 0.03);
+  --radius: 12px;
 }
 
-/* ==================== SIDEBAR: Slim & Elegant ==================== */
+/* 1. LAYOUT RESET: This prevents the sidebar from overlapping content */
+body {
+  margin: 0;
+  display: flex; /* Creates a side-by-side layout */
+  background-color: var(--clr-bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: white;
+  min-height: 100vh;
+}
+
+/* 2. SIDEBAR: Fixed width, non-intrusive */
 .sidebar {
-  position: fixed;
-  left: 16px;
-  top: 16px;
-  bottom: 16px;
-  width: 200px; /* Reduced width */
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--clr-border);
-  border-radius: 20px;
-  padding: 1.25rem; /* Tighter padding */
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  z-index: 1000;
+  width: var(--sb-width);
+  height: 100vh;
+  position: sticky; /* Stays in view but stays in its lane */
+  top: 0;
+  background: linear-gradient(180deg, #0a0e27, #05070f);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  flex-shrink: 0; /* Prevents sidebar from squishing */
+  box-sizing: border-box;
 }
 
 .sidebar h2 {
-  font-size: 1.2rem; /* Much smaller than before */
-  margin-bottom: 1.5rem;
-  text-align: left;
-  padding-left: 10px;
+  font-size: 1.2rem;
+  background: linear-gradient(to right, #00ffff, #ff00cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
 }
 
 .sidebar a {
-  font-size: 0.85rem; /* Smaller font for a "pro" look */
-  padding: 10px 12px;
-  border-radius: 8px;
+  display: block;
   color: #94a3b8;
-  margin-bottom: 2px;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: 0.2s;
 }
 
-/* ==================== MAIN CONTENT: Proper Spacing ==================== */
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--clr-accent);
+}
+
+/* 3. MAIN CONTENT: Takes up the remaining space */
 .main {
-  margin-left: 232px; /* sidebar width (200) + spacing (32) */
+  flex-grow: 1;
   padding: 40px;
-  max-width: 1400px; /* Prevents cards from stretching too wide on 4K screens */
+  max-width: calc(100vw - var(--sb-width));
+  box-sizing: border-box;
 }
 
-/* ==================== GRID: Dense & Responsive ==================== */
+/* 4. GRID: Tight and organized */
 .grid {
   display: grid;
-  /* This creates a dense grid that auto-fits based on a smaller 160px minimum */
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  /* Adjust 180px to make cards bigger or smaller */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-  padding: 0;
+  width: 100%;
 }
 
-/* ==================== GAME CARDS: Fixed Scaling ==================== */
+/* 5. CARDS: Uniform size, no stretching */
 .card, .game-card {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-modern);
-  aspect-ratio: 2 / 2.8; /* Keeps them a consistent "poster" shape */
+  background: var(--clr-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: auto;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--clr-accent);
 }
 
 .card img, .game-card img {
   width: 100%;
-  height: 180px; /* Fixed height for the image part */
-  object-fit: cover; /* Prevents stretching */
-  border-bottom: 1px solid var(--clr-border);
+  aspect-ratio: 16/10; /* Keeps all images the same shape */
+  object-fit: cover;
 }
 
-.game-title, .game-card p {
-  font-size: 0.8rem; /* Small, clean text */
-  padding: 12px;
+.game-title, .card p {
+  padding: 15px;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; /* Adds "..." if the title is too long */
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* ==================== MOBILE FIXES ==================== */
+/* 6. RESPONSIVE: Move sidebar to top on phones */
 @media (max-width: 768px) {
+  body { flex-direction: column; }
   .sidebar {
-    width: 60px; /* Collapse to icons-only width */
-    padding: 10px;
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .sidebar h2, .sidebar a span { display: none; } /* Hide text on mobile */
-  
   .main {
-    margin-left: 80px;
+    max-width: 100%;
     padding: 20px;
-  }
-  
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
   }
 }
