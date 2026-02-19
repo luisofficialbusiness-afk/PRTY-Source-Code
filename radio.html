@@ -1,60 +1,230 @@
-@@ -1,59 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRTY Radio | Dashboard</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/luisofficialbusiness-afk/PRTY-Source-Code@main/assets/canvas.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luisofficialbusiness-afk/PRTY-Source-Code@main/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luisofficialbusiness-afk/PRTY-Source-Code@main/css/radio.css">
+    
+    <style>
+        /* ==================== GLOBAL RESET ==================== */
+        * {
+            box-sizing: border-box !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #020617 !important;
+            color: #ffffff;
+            display: grid !important;
+            /* FORCES THE TWO-COLUMN LAYOUT */
+            grid-template-columns: 240px 1fr !important;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ==================== THE SIDEBAR FIX ==================== */
+        /* I renamed this to .sidebar-new to prevent your old CSS from touching it */
+        .sidebar-new {
+            grid-column: 1 !important;
+            width: 240px !important;
+            height: 100vh !important;
+            background: #0a0f1e !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 2rem 1.2rem !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 9999 !important;
+        }
+
+        .sidebar-new h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #00ffff, #ff00cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .sidebar-new a {
+            text-decoration: none !important;
+            color: #94a3b8 !important;
+            padding: 0.8rem 1rem !important;
+            border-radius: 12px !important;
+            font-weight: 500 !important;
+            transition: 0.2s;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-new a:hover {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #00ffff !important;
+            transform: translateX(5px);
+        }
+
+        .discord-btn {
+            margin-top: auto !important;
+            border: 1px solid #5865f2 !important;
+            color: #5865f2 !important;
+            text-align: center;
+        }
+
+        /* ==================== MAIN CONTENT FIX ==================== */
+        .radio-main-new {
+            grid-column: 2 !important;
+            padding: 4rem 2rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+
+        .radio-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: lowercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .radio-subtitle {
+            color: #64748b;
+            margin-bottom: 3rem;
+        }
+
+        /* STATIONS */
+        .radio-stations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .radio-stations button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .radio-stations button:hover {
+            background: #00ffff;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* PLAYER */
+        .radio-player-box {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .frame-container {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            line-height: 0;
+        }
+
+        /* PROXY */
+        .radio-proxy {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .radio-proxy button {
+            background: transparent;
+            border: 1px solid #ff00cc;
+            color: #ff00cc;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 900px) {
+            body { grid-template-columns: 1fr !important; }
+            .sidebar-new { width: 100% !important; height: auto !important; position: relative !important; }
+            .radio-main-new { grid-column: 1 !important; padding: 2rem 1rem !important; }
+        }
+    </style>
 </head>
 <body>
 
+    <aside class="sidebar-new" id="sidebar">
+        <h2>PRTY</h2>
+        <a href="index.html">Home</a>
+        <a href="games.html">Games</a>
+        <a href="apps.html">Apps</a>
+        <a href="movies.html">Movies</a>
+        <a href="manga.html">Manga</a>
+        <a href="proxy.html">Proxy</a>
+        <a href="credits.html">Credits</a>
+        <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
+    </aside>
 
-<div class="sidebar" id="sidebar">
-  <h2>PRTY</h2>
-  <a href="index.html">Home</a>
-  <a href="games.html">Games</a>
-  <a href="apps.html">Apps</a>
-  <a href="movies.html">Movies</a>
-  <a href="manga.html">Manga</a>
-  <a href="proxy.html">Proxy</a>
-  <a href="credits.html">Credits</a>
-  <a class="discord-btn" href="https://discord.gg/MdNsPVTJGv" target="_blank">Discord</a>
-  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-</div>
+    <main class="radio-main-new">
+        <h1 class="radio-title">🎧 prty radio</h1>
+        <p class="radio-subtitle">Sit back. Press play. Vibe.</p>
 
-<div class="main radio-main">
+        <div class="radio-stations">
+            <button onclick="selectStation(0, 'Main')">🔥 Main</button>
+            <button onclick="selectStation(1, 'Late Night')">🌙 Late Night</button>
+            <button onclick="selectStation(2, 'Energy')">⚡ Energy</button>
+            <button onclick="selectStation(3, 'Chill')">🧊 Chill</button>
+        </div>
 
-  <h1 class="radio-title">🎧 PRTY Radio</h1>
-  <p class="radio-subtitle">Sit back. Press play. Vibe.</p>
+        <div class="radio-player-box">
+            <div class="frame-container">
+                <iframe
+                    id="radio-frame"
+                    width="100%"
+                    height="350"
+                    scrolling="no"
+                    frameborder="no"
+                    allow="autoplay"
+                    src=""
+                ></iframe>
+            </div>
+        </div>
 
+        <div class="radio-proxy">
+            <p style="color: #475569; margin-bottom: 1rem;">⚠️ Music not loading?</p>
+            <button onclick="openRadioProxy()">🎧 Open PRTY Radio (Unblocked)</button>
+        </div>
+    </main>
 
-  <div class="radio-stations">
-    <button onclick="selectStation(0, 'Main')">🔥 Main</button>
-    <button onclick="selectStation(1, 'Late Night')">🌙 Late Night</button>
-    <button onclick="selectStation(2, 'Energy')">⚡ Energy</button>
-    <button onclick="selectStation(3, 'Chill')">🧊 Chill</button>
-  </div>
-  <div class="radio-proxy">
-    <p>⚠️ Music not loading?</p>
-    <button onclick="openRadioProxy()">🎧 Open PRTY Radio (Unblocked)</button>
-  </div>
+    <script>
+        function openRadioProxy() {
+            window.open('https://prty-educational-lessons.b-cdn.net', '_blank');
+        }
 
-  <div class="radio-player">
-    <iframe
-      id="radio-frame"
-      width="100%"
-      height="300"
-      scrolling="no"
-      frameborder="no"
-      allow="autoplay"
-    ></iframe>
-  </div>
-
-</div>
-
-<script src="js/main.js"></script>
-<script src="js/radio.js"></script>
+        function selectStation(id, name) {
+            // This function links to your radio.js station logic
+            if (typeof window.changeStation === "function") {
+                window.changeStation(id, name);
+            }
+        }
+    </script>
+    
+    <script src="js/main.js"></script>
+    <script src="js/radio.js"></script>
 </body>
 </html>
