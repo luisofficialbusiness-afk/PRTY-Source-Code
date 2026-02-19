@@ -1,72 +1,181 @@
-.radio-main {
-  padding: 40px;
-  text-align: center;
+:root {
+
+  
+
+  --bg-dark: #0f172a;
+
+  --accent-primary: #06b6d4;
+
+  --accent-secondary: #d946ef;
+
+  --glass-bg: rgba(255, 255, 255, 0.03);
+
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  --text-main: #f8fafc;
+
+  --text-muted: #94a3b8;
+
 }
+
+
+.radio-main {
+
+  padding: 80px 20px;
+
+  text-align: center;
+
+  background-color: var(--bg-dark);
+
+  min-height: 100vh;
+
+  color: var(--text-main);
+
+  font-family: 'Inter', system-ui, sans-serif;
+
+}
+
 
 .radio-title {
-  font-size: 2.5rem;
-  color: #00ffff;
-  text-shadow: 0 0 12px #ff00cc;
+
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive typography */
+
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  margin-bottom: 0.5rem;
+
 }
+
 
 .radio-subtitle {
-  opacity: 0.8;
-  margin-bottom: 30px;
+
+  color: var(--text-muted);
+
+  font-size: 1.1rem;
+
+  margin-bottom: 40px;
+
+  max-width: 600px;
+
+  margin-inline: auto;
+
 }
+
 
 .radio-stations {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 40px;
+
+  flex-wrap: wrap;
+
 }
+
 
 .radio-stations button {
-  background: linear-gradient(135deg, #ff00cc, #00ffff);
-  border: none;
-  color: #000;
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  background: var(--glass-bg);
+
+  backdrop-filter: blur(8px); /* The "Glassmorphism" effect */
+
+  border: 1px solid var(--glass-border);
+
+  color: var(--text-main);
+
+  font-weight: 500;
+
+  padding: 10px 24px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
+
 
 .radio-stations button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255,0,204,0.6);
+
+  background: var(--glass-border);
+
+  border-color: var(--accent-primary);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px -10px var(--accent-primary);
+
 }
+
 
 .radio-player {
-  max-width: 800px;
-  margin: 0 auto;
-  background: #000;
-  border-radius: 16px;
-  padding: 15px;
-  box-shadow: 0 0 30px rgba(0,255,255,0.25);
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  background: rgba(15, 23, 42, 0.6);
+
+  border: 1px solid var(--glass-border);
+
+  backdrop-filter: blur(12px);
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
 }
+
 
 .radio-proxy {
-  margin-top: 25px;
+
+  margin-top: 40px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid var(--glass-border);
+
 }
 
-.radio-proxy p {
-  margin-bottom: 10px;
-}
 
 .radio-proxy button {
-  background: linear-gradient(135deg, #ff00cc, #00ffff);
-  border: none;
-  color: #000;
-  font-weight: bold;
-  padding: 12px 22px;
-  border-radius: 25px;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0,255,255,0.4);
-  transition: transform 0.2s ease;
+
+  background: var(--text-main); /* High contrast action button */
+
+  color: var(--bg-dark);
+
+  border: none;
+
+  font-weight: 600;
+
+  padding: 14px 28px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: opacity 0.2s ease;
+
 }
 
+
 .radio-proxy button:hover {
-  transform: scale(1.05);
+
+  opacity: 0.9;
+
 }
