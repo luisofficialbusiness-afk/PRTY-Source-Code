@@ -1,150 +1,102 @@
-/* ==================== MODERNIZED DESIGN SYSTEM ==================== */
 :root {
-  /* Refined, more "expensive" feeling colors */
   --clr-pri: hsl(315, 100%, 55%);
   --clr-sec: hsl(185, 100%, 50%);
-  --clr-bg: #030712; /* Tailored deep slate */
-  --clr-surface: rgba(30, 41, 59, 0.5);
-  --clr-border: rgba(255, 255, 255, 0.08);
-  
-  /* Modern shadows: Layered for realism */
-  --shadow-flat: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
-  
-  --radius-modern: 14px;
-  --font-main: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  --clr-bg: #020617;
+  --clr-surface: rgba(30, 41, 59, 0.4);
+  --clr-border: rgba(255, 255, 255, 0.06);
+  --radius-modern: 12px;
+  --font-main: 'Inter', system-ui, sans-serif;
 }
 
-/* ==================== GLOBAL UPDATES ==================== */
-body {
-  margin: 0;
-  font-family: var(--font-main);
-  background: radial-gradient(at top left, #0f172a, #020617);
-  color: #f8fafc;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ==================== SIDEBAR (Glassmorphism) ==================== */
+/* ==================== SIDEBAR: Slim & Elegant ==================== */
 .sidebar {
   position: fixed;
-  left: 12px;
-  top: 12px;
-  bottom: 12px;
-  width: 240px;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(16px) saturate(180%);
+  left: 16px;
+  top: 16px;
+  bottom: 16px;
+  width: 200px; /* Reduced width */
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--clr-border);
-  border-radius: 24px;
-  padding: 2rem;
-  box-shadow: var(--shadow-elevated);
+  border-radius: 20px;
+  padding: 1.25rem; /* Tighter padding */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
   z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar h2 {
+  font-size: 1.2rem; /* Much smaller than before */
+  margin-bottom: 1.5rem;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .sidebar a {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  margin: 4px 0;
-  border-radius: 12px;
+  font-size: 0.85rem; /* Smaller font for a "pro" look */
+  padding: 10px 12px;
+  border-radius: 8px;
   color: #94a3b8;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  text-decoration: none;
+  margin-bottom: 2px;
 }
 
-.sidebar a:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--clr-sec);
-  transform: translateX(4px);
+/* ==================== MAIN CONTENT: Proper Spacing ==================== */
+.main {
+  margin-left: 232px; /* sidebar width (200) + spacing (32) */
+  padding: 40px;
+  max-width: 1400px; /* Prevents cards from stretching too wide on 4K screens */
 }
 
-/* Active State indicator */
-.sidebar a.active {
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.1), transparent);
-  color: var(--clr-sec);
-  border-left: 3px solid var(--clr-sec);
-}
-
-/* ==================== CONTENT CARDS (Depth & Hover) ==================== */
+/* ==================== GRID: Dense & Responsive ==================== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
-  padding: 24px;
+  /* This creates a dense grid that auto-fits based on a smaller 160px minimum */
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  gap: 20px;
+  padding: 0;
 }
 
+/* ==================== GAME CARDS: Fixed Scaling ==================== */
 .card, .game-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-modern);
+  aspect-ratio: 2 / 2.8; /* Keeps them a consistent "poster" shape */
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.card img, .game-card img {
+  width: 100%;
+  height: 180px; /* Fixed height for the image part */
+  object-fit: cover; /* Prevents stretching */
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.game-title, .game-card p {
+  font-size: 0.8rem; /* Small, clean text */
+  padding: 12px;
+  margin: 0;
+  white-space: nowrap;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  position: relative;
+  text-overflow: ellipsis; /* Adds "..." if the title is too long */
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 
-              0 0 20px -5px var(--clr-sec);
-}
-
-.card img {
-  filter: grayscale(20%);
-  transition: filter 0.4s ease, transform 0.4s ease;
-}
-
-.card:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.05);
-}
-
-/* ==================== BUTTONS (Subtle Gradients) ==================== */
-.filter-bar button, .back-home {
-  background: #1e293b;
-  border: 1px solid var(--clr-border);
-  color: #f8fafc;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-flat);
-}
-
-.filter-bar button:hover {
-  background: var(--clr-sec);
-  color: #000;
-  border-color: var(--clr-sec);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.4);
-}
-
-/* ==================== SETTINGS (Modern Input Styles) ==================== */
-.settings-card {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
-  padding: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.settings-card input {
-  background: #0f172a !important;
-  border: 2px solid #1e293b !important;
-  border-radius: 12px !important;
-  padding: 14px !important;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.settings-card input:focus {
-  border-color: var(--clr-sec) !important;
-  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1) !important;
-}
-
-/* ==================== UTILITY ==================== */
-.page-title {
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  text-transform: lowercase; /* Modern "tech" look */
+/* ==================== MOBILE FIXES ==================== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px; /* Collapse to icons-only width */
+    padding: 10px;
+  }
+  .sidebar h2, .sidebar a span { display: none; } /* Hide text on mobile */
+  
+  .main {
+    margin-left: 80px;
+    padding: 20px;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
 }
