@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PRTY Chat (Beta)</title>
+  <link rel="icon" type="image/png" href="assets/canvas.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+  body {
+    overflow: hidden;
+  }
+
+  .chat-wrapper {
+    margin-left: 220px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-header {
+    padding: 15px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 10px #ff00cc;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .message {
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.4);
+    box-shadow: 0 0 10px rgba(0,255,255,0.15);
+    word-break: break-word;
+  }
+
+  .username {
+    font-weight: bold;
+    color: #00ffff;
+    margin-right: 6px;
+  }
+
+  .system {
+    text-align: center;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .chat-input-bar {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.5);
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #0f172a;
+    color: white;
+    font-size: 0.95rem;
+  }
+
+  .send-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff00cc, #00ffff);
+    color: black;
+  }
+
+  .mod-panel {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: #0b0b0f;
+    border-left: 2px solid #00ffff;
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 2000;
+  }
+
+  .mod-panel.open {
+    right: 0;
+  }
+
+  .mod-title {
+    font-size: 1.2rem;
+    color: #ff00cc;
+    margin-bottom: 15px;
+  }
+
+  .mod-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00ffff, #ff00cc);
+    color: black;
+  }
+
+  .mod-log {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    max-height: 50vh;
+    overflow-y: auto;
+    opacity: 0.8;
+  }
+  </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <h2>PRTY</h2>
+  <a href="index.html">Home</a>
+  <a href="games.html">Games</a>
+  <a href="apps.html">Apps</a>
+  <a href="movies.html">Movies</a>
+  <a href="manga.html">Manga</a>
+  <a href="proxy.html">Proxy</a>
+  <a href="radio.html">PRTY Radio</a>
+</div>
+
+<div class="chat-wrapper">
+  <div class="chat-header">💬 PRTY Chat (Beta)</div>
+  <div class="chat-messages" id="chat-messages"></div>
+
+  <div class="chat-input-bar">
+    <input class="chat-input" id="chat-input" placeholder="Type a message... (2s slowmode)">
+    <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<div class="mod-panel" id="mod-panel">
+  <div class="mod-title">Mod Panel</div>
+  <button class="mod-btn" onclick="toggleLock()">Toggle Chat Lock</button>
+  <button class="mod-btn" onclick="clearChat()">Clear Chat</button>
+  <div class="mod-log" id="mod-log"></div>
+</div>
+
+<script src="js/main.js"></script>
+
+<script>
+const chatBox = document.getElementById("chat-messages");
+const input = document.getElementById("chat-input");
+const modPanel = document.getElementById("mod-panel");
+const modLog = document.getElementById("mod-log");
+
+let lastMessageTime = 0;
+let chatLocked = false;
+let messageCount = 0;
+
+const guestId = "PRTY-Guest#" + Math.floor(1000 + Math.random() * 9000);
+
+addSystemMessage("You joined as " + guestId);
+
+function addSystemMessage(text) {
+  const msg = document.createElement("div");
+  msg.className = "message system";
+  msg.textContent = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function addModLog(text) {
+  const log = document.createElement("div");
+  log.textContent = text;
+  modLog.appendChild(log);
+}
+
+function sendMessage() {
+  if (chatLocked) {
+    addSystemMessage("Chat is currently locked by a moderator.");
+    return;
+  }
+
+  const now = Date.now();
+  if (now - lastMessageTime < 2000) {
+    addSystemMessage("Slowmode: wait 2 seconds.");
+    return;
+  }
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  if (text.length > 200) {
+    addSystemMessage("Message too long.");
+    return;
+  }
+
+  if (/(.)\1{6,}/i.test(text)) {
+    addSystemMessage("Spam detected.");
+    return;
+  }
+
+  lastMessageTime = now;
+
+  const msg = document.createElement("div");
+  msg.className = "message";
+  msg.innerHTML = '<span class="username">' + guestId + ':</span> ' + text;
+
+  chatBox.appendChild(msg);
+  input.value = "";
+  messageCount++;
+
+  if (messageCount > 100) {
+    chatBox.removeChild(chatBox.firstChild);
+  }
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function toggleLock() {
+  chatLocked = !chatLocked;
+  addModLog("Chat lock: " + (chatLocked ? "ON" : "OFF"));
+  addSystemMessage("Moderator changed chat lock.");
+}
+
+function clearChat() {
+  chatBox.innerHTML = "";
+  addModLog("Chat cleared");
+  addSystemMessage("Chat was cleared by moderator.");
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") sendMessage();
+  if (e.ctrlKey && e.key.toLowerCase() === "m") {
+    modPanel.classList.toggle("open");
+  }
+});
+</script>
+
+</body>
+</html>
