@@ -35,6 +35,12 @@
   
 <div class="main">
   <h1 class="page-title">🎮 Games</h1>
+  <input
+  type="text"
+  id="game-search"
+  placeholder="🔍 Search games..."
+  class="game-search-bar"
+/>
 
   <div class="grid">
 
@@ -631,5 +637,30 @@
 
 <script src="js/main.js"></script>
     <script src="https://pl28723390.effectivegatecpm.com/15/27/c0/1527c047500965dbd555066e1303ea48.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("game-search");
+  const cards = document.querySelectorAll(".card");
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", function () {
+    const query = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const titleElement = card.querySelector(".game-title");
+      if (!titleElement) return;
+
+      const title = titleElement.textContent.toLowerCase();
+
+      if (title.includes(query)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
